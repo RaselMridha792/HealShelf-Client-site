@@ -1,27 +1,60 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/authRelated/doctorLogin.png";
 import PrimaryBtn from "../../Components/shared/PrimaryBtn";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import { useForm } from "react-hook-form";
-
+import { FaGoogle } from "react-icons/fa";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 const Login = () => {
-  const { LoginUser } = useContext(AuthContext);
-   const {
-      register,
-      handleSubmit,
-      reset,
-    } = useForm();
+  const { LoginUser, signInGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { register, handleSubmit, reset } = useForm();
+  const axiosPublic = useAxiosPublic();
 
-    const onSubmit = (data) =>{
-      LoginUser(data.email, data.password)
-      .then(res=>{
-        console.log(res)
-        reset()
-      }).catch(error=>{
-        console.log(error)
+  const onSubmit = (data) => {
+    LoginUser(data.email, data.password)
+      .then((res) => {
+        console.log(res);
+        reset();
       })
-    }
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleGoogleLogin = () => {
+    signInGoogle()
+      .then((result) => {
+        console.log(result.user.displayName);
+        const name = result.user.displayName;
+        const email = result.user.email;
+        const image = result.user.photoURL;
+        const role = "";
+        const userInfo = { name, email, image, role };
+        // send user information to the database
+        axiosPublic.post("/users", userInfo).then((res) => {
+          const response = res.data.acknowledged;
+          if (response) {
+            console.log(response)
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Profile Created Successful",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }else{
+            console.log(res)
+          }
+          navigate("/");
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <>
@@ -64,11 +97,17 @@ const Login = () => {
               </div>
               <div className="form-control mt-6">
                 <PrimaryBtn type="submit" title={"login"}></PrimaryBtn>
+                <Link
+                  onClick={handleGoogleLogin}
+                  className="btn btn-outline mt-5 text-pink-600 hover:bg-pink-600 hover:text-white"
+                >
+                  <FaGoogle />Login With Google
+                </Link>
               </div>
               <p className="text-center py-1">
                 Don`t have an account{" "}
                 <span className="text-pink-600">
-                  <Link to='/register'>please register</Link>
+                  <Link to="/register">please register</Link>
                 </span>
               </p>
             </form>

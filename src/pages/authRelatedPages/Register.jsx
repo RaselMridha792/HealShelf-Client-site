@@ -7,51 +7,84 @@ import { AuthContext } from "../../Context/AuthProvider";
 import useUploadImage from "../../hooks/useUploadImage";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { FaGoogle } from "react-icons/fa";
 
 const Register = () => {
-  const { CreateUser, upDateUser } = useContext(AuthContext);
+  const { CreateUser, upDateUser, signInGoogle } = useContext(AuthContext);
   const saveImgBB = useUploadImage();
   const axiosPublic = useAxiosPublic();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit =  async(data) => {
+  const onSubmit = async (data) => {
     // sent imagedata img bb
     const image = data.file[0];
-    const image_url = await saveImgBB(image)
+    const image_url = await saveImgBB(image);
     CreateUser(data.email, data.password)
       .then((res) => {
         // update user profile
-        const name = data.name
-        const image = image_url
+        const name = data.name;
+        const image = image_url;
         upDateUser(name, image)
-        .then(()=>{
-          const userInfo = {email: data.email, name: name, image: image, role: data.role}
-          // send user information to the database 
-          axiosPublic.post('/users', userInfo)
-          .then(res =>{
-            const response = res.data.acknowledged
-            if(response){
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Profile Created Successful",
-                showConfirmButton: false,
-                timer: 1500
-              });
-              navigate('/')
-            }
+          .then(() => {
+            const userInfo = {
+              email: data.email,
+              name: name,
+              image: image,
+              role: data.role,
+            };
+            // send user information to the database
+            axiosPublic.post("/users", userInfo).then((res) => {
+              const response = res.data.acknowledged;
+              if (response) {
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "Profile Created Successful",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
+            });
           })
-        })
-        .catch(error=>{
-          console.log(error)
-        })
-        reset()
+          .catch((error) => {
+            console.log(error);
+          });
+        reset();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleGoogleLogin = () => {
+    signInGoogle()
+      .then((result) => {
+        console.log(result.user.displayName);
+        const name = result.user.displayName;
+        const email = result.user.email;
+        const image = result.user.photoURL;
+        const role = "";
+        const userInfo = { name, email, image, role };
+        // send user information to the database
+        axiosPublic.post("/users", userInfo).then((res) => {
+          const response = res.data.acknowledged;
+          if (response) {
+            console.log(response)
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Profile Created Successful",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }else{
+            console.log(res)
+          }
+          navigate("/");
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -128,14 +161,16 @@ const Register = () => {
                   className="input input-bordered"
                   required
                 />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
               </div>
               <div className="form-control mt-6">
                 <PrimaryBtn type="submit" title={"Register"}></PrimaryBtn>
+                <Link
+                  onClick={handleGoogleLogin}
+                  className="btn btn-outline mt-5 text-pink-600 hover:bg-pink-600 hover:text-white"
+                >
+                  <FaGoogle />
+                  Register With Google
+                </Link>
               </div>
               <p className="text-center py-1">
                 have an account{" "}
