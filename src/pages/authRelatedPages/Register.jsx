@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PrimaryBtn from "../../Components/shared/PrimaryBtn";
 import logo from "../../assets/authRelated/doctorRegister.png";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import useUploadImage from "../../hooks/useUploadImage";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { CreateUser, upDateUser } = useContext(AuthContext);
   const saveImgBB = useUploadImage();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate()
 
   const {
     register,
@@ -27,14 +31,27 @@ const Register = () => {
         const image = image_url
         upDateUser(name, image)
         .then(()=>{
-          console.log('user profile updated successfully')
+          const userInfo = {email: data.email, name: name, image: image, role: data.role}
+          // send user information to the database 
+          axiosPublic.post('/users', userInfo)
+          .then(res =>{
+            const response = res.data.acknowledged
+            if(response){
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Profile Created Successful",
+                showConfirmButton: false,
+                timer: 1500
+              });
+              navigate('/')
+            }
+          })
         })
         .catch(error=>{
           console.log(error)
         })
         reset()
-        const userInfo = {email: data.email, name: name, image: image, role: data.role}
-        console.log(userInfo)
       })
       .catch((error) => {
         console.log(error);
@@ -42,14 +59,14 @@ const Register = () => {
   };
   return (
     <>
-      <div className="hero bg-base-200 min-h-screen py-20">
-        <div className="hero-content flex-col-reverse items-center justify-evenly gap-10 lg:flex-row-reverse">
-          <div>
-            <img className="w-2/3" src={logo} alt="" />
+      <div className="items-center justify-center flex lg:mt-40 mt-20">
+        <div className="flex lg:w-8/12 md:w-10/12 mx-auto flex-col-reverse justify-between items-center lg:flex-row-reverse">
+          <div className="w-full flex items-center justify-center">
+            <img className="md:w-2/3" src={logo} alt="" />
           </div>
-          <div className="card bg-base-100 w-full">
+          <div className="w-full">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-              <h1 className="text-3xl font-bold text-center">Register</h1>
+              <h1 className="text-4xl font-bold text-center">Register</h1>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">User Name*</span>
