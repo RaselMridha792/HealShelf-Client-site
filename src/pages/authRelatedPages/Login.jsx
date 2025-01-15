@@ -31,7 +31,7 @@ const Login = () => {
         const name = result.user.displayName;
         const email = result.user.email;
         const image = result.user.photoURL;
-        const role = "";
+        const role = "customer";
         const userInfo = { name, email, image, role };
         // send user information to the database
         axiosPublic.post("/users", userInfo).then((res) => {
@@ -99,14 +99,14 @@ const Login = () => {
                 <PrimaryBtn type="submit" title={"login"}></PrimaryBtn>
                 <Link
                   onClick={handleGoogleLogin}
-                  className="btn btn-outline mt-5 text-pink-600 hover:bg-pink-600 hover:text-white"
+                  className="btn btn-outline mt-5 text-cyan-400 hover:bg-cyan-400"
                 >
                   <FaGoogle />Login With Google
                 </Link>
               </div>
               <p className="text-center py-1">
                 Don`t have an account{" "}
-                <span className="text-pink-600">
+                <span className="text-cyan-500">
                   <Link to="/register">please register</Link>
                 </span>
               </p>

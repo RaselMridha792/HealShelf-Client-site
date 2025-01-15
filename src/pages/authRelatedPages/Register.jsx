@@ -22,7 +22,7 @@ const Register = () => {
     const image = data.file[0];
     const image_url = await saveImgBB(image);
     CreateUser(data.email, data.password)
-      .then((res) => {
+      .then(() => {
         // update user profile
         const name = data.name;
         const image = image_url;
@@ -66,7 +66,7 @@ const Register = () => {
         const name = result.user.displayName;
         const email = result.user.email;
         const image = result.user.photoURL;
-        const role = "";
+        const role = "customer";
         const userInfo = { name, email, image, role };
         // send user information to the database
         axiosPublic.post("/users", userInfo).then((res) => {
@@ -166,7 +166,7 @@ const Register = () => {
                 <PrimaryBtn type="submit" title={"Register"}></PrimaryBtn>
                 <Link
                   onClick={handleGoogleLogin}
-                  className="btn btn-outline mt-5 text-pink-600 hover:bg-pink-600 hover:text-white"
+                  className="btn btn-outline mt-5 text-cyan-400 hover:bg-cyan-500"
                 >
                   <FaGoogle />
                   Register With Google
@@ -174,7 +174,7 @@ const Register = () => {
               </div>
               <p className="text-center py-1">
                 have an account{" "}
-                <span className="text-pink-600">
+                <span className="text-cyan-500">
                   <Link to="/login">please Login</Link>
                 </span>
               </p>

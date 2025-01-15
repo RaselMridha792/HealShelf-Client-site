@@ -1,33 +1,32 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import { FaCartShopping } from "react-icons/fa6";
 
 const Navbar = () => {
   const { user, logOutUser } = useContext(AuthContext);
-  const handleSignOut = ()=>{
+  const handleSignOut = () => {
     logOutUser()
-    .then(()=>{
-      alert('successfully signed Out')
-    }).catch(error=>{
-      console.log(error)
-    })
-  }
+      .then(() => {
+        alert("successfully signed Out");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const links = (
     <>
       <li>
         <NavLink to="/">home</NavLink>
       </li>
       <li>
-        <NavLink to="/login">login</NavLink>
-      </li>
-      <li>
-        <NavLink to="/register">register</NavLink>
+        <NavLink to="/shop-now">shop now</NavLink>
       </li>
     </>
   );
   return (
     <>
-      <section className="bg-pink-600 fixed w-full z-50 top-0">
+      <section className="bg-cyan-400 fixed w-full z-50 top-0">
         <div className="navbar max-w-screen-2xl mx-auto px-5">
           <div className="navbar-start">
             <div className="dropdown">
@@ -65,7 +64,20 @@ const Navbar = () => {
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
-          <div className="navbar-end">
+          <div className="navbar-end gap-5">
+            <div>
+              <div
+                  className="dropdown dropdown-bottom dropdown-left"
+                  tabIndex={0}
+                >
+              <FaCartShopping className="text-2xl" />
+                  <ul className="dropdown-content text-center z-10 menu p-5 mt-5 shadow bg-white rounded-box w-52">
+                    <h1>total price: $0</h1>
+                    <Link to="/dashboard/cart" className="btn mt-5 bg-cyan-400">view cart</Link>
+                  </ul>
+                </div>
+
+            </div>
             {user ? (
               <>
                 <div
@@ -77,7 +89,7 @@ const Navbar = () => {
                       <img src={user?.photoURL} />
                     </div>
                   </div>
-                  <ul className="dropdown-content z-10 text-white menu p-5 shadow bg-pink-600 rounded-box w-52">
+                  <ul className="dropdown-content z-10 mt-2 menu p-5 shadow bg-cyan-400 rounded-box w-52">
                     <li>
                       <NavLink to="/user-profile">Update Profile</NavLink>
                     </li>
@@ -91,7 +103,10 @@ const Navbar = () => {
                 </div>
               </>
             ) : (
-              <Link to="/login" className="btn bg-gray-700 border-none text-white">
+              <Link
+                to="/login"
+                className="btn bg-gray-700 border-none text-white"
+              >
                 Join Now
               </Link>
             )}
