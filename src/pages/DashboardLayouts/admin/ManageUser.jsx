@@ -37,6 +37,32 @@ const ManageUser = () => {
       }
     });
   };
+
+  const handleDeleteUser = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to delete this user?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete this!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "user has been deleted.",
+              icon: "success"
+            });
+          }
+        });
+      }
+    });
+  };
   return (
     <>
       <h1 className="text-3xl capitalize text-center pt-10 pb-5">
@@ -103,7 +129,10 @@ const ManageUser = () => {
                     </select>
                   </td>
                   <th>
-                    <button className="btn btn-ghost text-xl bg-red-500 text-white">
+                    <button
+                      onClick={() => handleDeleteUser(user._id)}
+                      className="btn btn-ghost text-xl bg-red-500 text-white"
+                    >
                       <FaRegTrashAlt />
                     </button>
                   </th>
