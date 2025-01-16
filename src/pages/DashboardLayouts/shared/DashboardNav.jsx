@@ -13,7 +13,7 @@ import { FaMoneyBill1Wave } from "react-icons/fa6";
 const DashboardNav = () => {
   const [sidebar, setSidebar] = useState(false);
   const { user } = useContext(AuthContext);
-  const userRole = "seller";
+  const userRole = "admin";
   return (
     <>
       <section className="bg-cyan-400 py-5 fixed w-full z-50">
