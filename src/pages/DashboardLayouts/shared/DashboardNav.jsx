@@ -9,11 +9,14 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 import { GiMedicines } from "react-icons/gi";
 import { FaMoneyBill1Wave } from "react-icons/fa6";
+import useRole from "../../../hooks/useRole";
 
 const DashboardNav = () => {
   const [sidebar, setSidebar] = useState(false);
   const { user } = useContext(AuthContext);
-  const userRole = "admin";
+  const [role] = useRole();
+  const userRole = role;
+
   return (
     <>
       <section className="bg-cyan-400 py-5 fixed w-full z-50">
@@ -89,7 +92,7 @@ const DashboardNav = () => {
               )}
 
               {/* seller routes */}
-              {userRole == "seller" && (
+              {userRole == "Seller" && (
                 <ul className="flex menu items-start flex-col lg:text-xl">
                   <li>
                     <NavLink to="/dashboard/seller-home">

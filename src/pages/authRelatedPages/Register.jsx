@@ -29,7 +29,7 @@ const Register = () => {
         upDateUser(name, image)
           .then(() => {
             const userInfo = {
-              email: data.email,
+              email: data.email.toLowerCase(),
               name: name,
               image: image,
               role: data.role,

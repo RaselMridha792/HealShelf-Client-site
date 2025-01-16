@@ -24,6 +24,7 @@ const ManageUser = () => {
       confirmButtonText: `Yes, set ${selectedRole}`,
     }).then((result) => {
       if (result.isConfirmed) {
+        refetch()
         axiosSecure.patch(`/user/role/${id}`, { selectedRole }).then((res) => {
           result = res.data.acknowledged;
           if (result) {
@@ -34,6 +35,9 @@ const ManageUser = () => {
             });
           }
         });
+      }
+      else{
+        refetch()
       }
     });
   };
