@@ -6,6 +6,8 @@ import Register from "../pages/authRelatedPages/Register";
 import Dashboard from "../pages/DashboardLayouts/Dashboard";
 import AdminHome from "../pages/DashboardLayouts/admin/AdminHome";
 import ManageUser from "../pages/DashboardLayouts/admin/ManageUser";
+import SellerHome from "../pages/DashboardLayouts/seller/SellerHome";
+import CustomerHome from "../pages/DashboardLayouts/customer/CustomerHome";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +35,14 @@ export const router = createBrowserRouter([
       {
         path: 'admin-home',
         element: <AdminHome></AdminHome>
+      },
+      {
+        path: 'seller-home',
+        element: <SellerHome></SellerHome>
+      },
+      {
+        path: 'customer-home',
+        element: <CustomerHome />
       },
       {
         path: 'manage-user',

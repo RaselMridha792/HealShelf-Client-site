@@ -2,9 +2,12 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import { FaCartShopping } from "react-icons/fa6";
+import useRole from "../../hooks/useRole";
 
 const Navbar = () => {
   const { user, logOutUser } = useContext(AuthContext);
+  const [role] = useRole();
+  const userRole = role;
   const handleSignOut = () => {
     logOutUser()
       .then(() => {
@@ -94,7 +97,10 @@ const Navbar = () => {
                       <NavLink to="/user-profile">Update Profile</NavLink>
                     </li>
                     <li>
-                      <NavLink to="/dashboard">Dashboard</NavLink>
+                     
+                      {userRole == "admin" &&  <NavLink to="/dashboard/admin-home">Dashboard</NavLink>}
+                      {userRole == "Seller" &&  <NavLink to="/dashboard/seller-home">Dashboard</NavLink>}
+                      {userRole == "customer" &&  <NavLink to="/dashboard/customer-home">Dashboard</NavLink>}
                     </li>
                     <li>
                       <button onClick={handleSignOut}>Log out</button>

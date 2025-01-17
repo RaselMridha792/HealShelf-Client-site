@@ -58,7 +58,7 @@ const DashboardNav = () => {
                 // admin routes
                 <ul className="flex menu items-start flex-col lg:text-xl">
                   <li>
-                    <NavLink to="/dashboard/admin-home">
+                    <NavLink to="admin-home">
                       <MdOutlineHome /> Admin Home
                     </NavLink>
                   </li>
