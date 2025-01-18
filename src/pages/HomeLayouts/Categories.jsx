@@ -1,9 +1,9 @@
+import { Link } from "react-router-dom";
 import useCategories from "../DashboardLayouts/shared/loadDataHook/useCategories";
 import Loader from "../DashboardLayouts/shared/Loader";
 
 const Categories = () => {
   const [categories, isLoading] = useCategories();
-  console.log(categories);
   return (
     <>
       <section className="my-20">
@@ -13,7 +13,7 @@ const Categories = () => {
             <Loader></Loader>
           ) : (
             categories.map((category) => (
-              <div
+              <Link to={`/category/${category.categoryName}`}
                 className="card border hover:border-cyan-500 duration-300 rounded-none"
                 key={category._id}
               >
@@ -30,7 +30,7 @@ const Categories = () => {
                     <p className="text-sm">{category.medicineCount} Product</p>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))
           )}
         </div>

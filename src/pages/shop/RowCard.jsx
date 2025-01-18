@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { MdRemoveRedEye } from "react-icons/md";
+import { AuthContext } from "../../Context/AuthProvider";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import useCart from "../../hooks/useCart";
 
 const RowCard = ({ product }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModal, setIsModal] = useState(null);
+  const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+  const [, refetch] = useCart();
+  const email = user?.email;
 
-  const { _id, name, image, description, dosage, manufacturer, price } =
-    product;
-
+  const { _id, name, image, price, manufacturer } = product;
+  const mainPrice = parseFloat(price.slice(1, 5));
   const handleOpenModal = () => {
     setSelectedProduct(product);
     setIsModal(true);
@@ -18,8 +25,25 @@ const RowCard = ({ product }) => {
     setIsModal(false);
   };
 
-  const handleAddToCart = (id) => {
-    console.log(id);
+  const handleAddToCart = async (id) => {
+    const cartData = {
+      email,
+      id,
+      name,
+      image,
+      mainPrice,
+      manufacturer,
+      quantity: 1,
+    };
+    const res = await axiosSecure.post("/products/add-cart", cartData);
+    if (res.data.acknowledged) {
+      Swal.fire({
+        title: "Added to the Cart",
+        icon: "success",
+        draggable: true,
+      });
+      refetch();
+    }
   };
   return (
     <>
@@ -38,7 +62,10 @@ const RowCard = ({ product }) => {
         </td>
         <td>{price}</td>
         <div className="mt-3 ml-4">
-          <button onClick={() => handleAddToCart(_id)} className="btn bg-orange-400">
+          <button
+            onClick={() => handleAddToCart(_id)}
+            className="btn bg-orange-400"
+          >
             Select
           </button>
         </div>
@@ -51,20 +78,22 @@ const RowCard = ({ product }) => {
       {isModal && (
         <dialog id="my_modal_4" className="modal" open>
           <div className="modal-box">
-            <img className="w-52 md:w-96" src={image} alt="" />
+            <img className="w-52 md:w-96" src={selectedProduct?.image} alt="" />
             <div className="flex gap-5 items-center">
-              <h3 className="font-bold text-lg">{name}</h3>
-              <p className="text-lg font-bold">{price}</p>
+              <h3 className="font-bold text-lg">{selectedProduct?.name}</h3>
+              <p className="text-lg font-bold">{selectedProduct?.price}</p>
             </div>
             <p className="pt-4">
               <span className="font-bold">description: </span>
-              {description}
+              {selectedProduct?.description}
             </p>
             <p className="pt-2">
-              <span className="font-bold">Dosage:</span> {dosage}
+              <span className="font-bold">Dosage:</span>{" "}
+              {selectedProduct?.dosage}
             </p>
             <p className="pt-2">
-              <span className="font-bold">manufacturer: </span> {manufacturer}
+              <span className="font-bold">manufacturer: </span>{" "}
+              {selectedProduct?.manufacturer}
             </p>
             <div className="modal-action">
               <form method="dialog">

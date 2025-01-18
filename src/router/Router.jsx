@@ -9,6 +9,8 @@ import ManageUser from "../pages/DashboardLayouts/admin/ManageUser";
 import SellerHome from "../pages/DashboardLayouts/seller/SellerHome";
 import CustomerHome from "../pages/DashboardLayouts/customer/CustomerHome";
 import ShopNow from "../pages/shop/ShopNow";
+import CategoryDetails from "../pages/categoryDetails/CategoryDetails";
+import UserCart from "../pages/cart/UserCart";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ export const router = createBrowserRouter([
         {
           path: '/shop-now',
           element: <ShopNow></ShopNow>
+        },
+        {
+          path: '/category/:category',
+          element: <CategoryDetails></CategoryDetails>
+        },
+        {
+          path: '/cart',
+          element: <UserCart></UserCart>
         }
     ]
   },
@@ -52,7 +62,7 @@ export const router = createBrowserRouter([
       {
         path: 'manage-user',
         element: <ManageUser></ManageUser>
-      }
+      },
     ]
   }
 ]);

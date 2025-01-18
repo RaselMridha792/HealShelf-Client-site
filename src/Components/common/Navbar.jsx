@@ -3,10 +3,15 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import { FaCartShopping } from "react-icons/fa6";
 import useRole from "../../hooks/useRole";
+import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
   const { user, logOutUser } = useContext(AuthContext);
   const [role] = useRole();
+  const [cart, refetch, isLoading] = useCart();
+  if (!isLoading) {
+    refetch()
+  }
   const userRole = role;
   const handleSignOut = () => {
     logOutUser()
@@ -67,19 +72,17 @@ const Navbar = () => {
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
-          <div className="navbar-end gap-5">
-            <div>
+          <div className="navbar-end gap-10">
+            <div className="relative">
               <div
-                  className="dropdown dropdown-bottom dropdown-left"
-                  tabIndex={0}
-                >
-              <FaCartShopping className="text-2xl" />
-                  <ul className="dropdown-content text-center z-10 menu p-5 mt-5 shadow bg-white rounded-box w-52">
-                    <h1>total price: $0</h1>
-                    <Link to="/dashboard/cart" className="btn mt-5 bg-cyan-400">view cart</Link>
-                  </ul>
-                </div>
-
+                className="dropdown dropdown-bottom dropdown-left"
+                tabIndex={0}
+              >
+                <Link to="/cart"><FaCartShopping className="text-3xl" /></Link>
+              </div>
+              <div className="absolute -top-3 -right-5 badge badge-secondary">
+                <p>{cart?.length}</p>
+              </div>
             </div>
             {user ? (
               <>
@@ -97,10 +100,17 @@ const Navbar = () => {
                       <NavLink to="/user-profile">Update Profile</NavLink>
                     </li>
                     <li>
-                     
-                      {userRole == "admin" &&  <NavLink to="/dashboard/admin-home">Dashboard</NavLink>}
-                      {userRole == "Seller" &&  <NavLink to="/dashboard/seller-home">Dashboard</NavLink>}
-                      {userRole == "customer" &&  <NavLink to="/dashboard/customer-home">Dashboard</NavLink>}
+                      {userRole == "admin" && (
+                        <NavLink to="/dashboard/admin-home">Dashboard</NavLink>
+                      )}
+                      {userRole == "Seller" && (
+                        <NavLink to="/dashboard/seller-home">Dashboard</NavLink>
+                      )}
+                      {userRole == "customer" && (
+                        <NavLink to="/dashboard/customer-home">
+                          Dashboard
+                        </NavLink>
+                      )}
                     </li>
                     <li>
                       <button onClick={handleSignOut}>Log out</button>

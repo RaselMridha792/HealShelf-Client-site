@@ -16,8 +16,16 @@ const Login = () => {
   const onSubmit = (data) => {
     LoginUser(data.email, data.password)
       .then((res) => {
-        console.log(res);
+        console.log("login successful");
         reset();
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Profile Created Successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate('/')
       })
       .catch((error) => {
         console.log(error);
@@ -37,7 +45,6 @@ const Login = () => {
         axiosPublic.post("/users", userInfo).then((res) => {
           const response = res.data.acknowledged;
           if (response) {
-            console.log(response)
             Swal.fire({
               position: "center",
               icon: "success",
