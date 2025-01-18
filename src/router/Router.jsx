@@ -8,6 +8,7 @@ import AdminHome from "../pages/DashboardLayouts/admin/AdminHome";
 import ManageUser from "../pages/DashboardLayouts/admin/ManageUser";
 import SellerHome from "../pages/DashboardLayouts/seller/SellerHome";
 import CustomerHome from "../pages/DashboardLayouts/customer/CustomerHome";
+import ShopNow from "../pages/shop/ShopNow";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
         {
             path: '/register',
             element: <Register></Register>
+        },
+        {
+          path: '/shop-now',
+          element: <ShopNow></ShopNow>
         }
     ]
   },

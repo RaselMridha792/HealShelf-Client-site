@@ -28,9 +28,6 @@ const Categories = () => {
                   <h1 className="card-title">{category.categoryName}</h1>
                   <div className="mt-auto flex items-center">
                     <p className="text-sm">{category.medicineCount} Product</p>
-                    <button className="btn btn-sm btn-outline text-cyan-700">
-                      view more
-                    </button>
                   </div>
                 </div>
               </div>
