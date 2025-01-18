@@ -1,6 +1,43 @@
 import { FaRegTrashAlt } from "react-icons/fa";
-const CartFields = ({cartItems}) => {
-    const {_id, email, id, name, image, mainPrice, manufacturer,quantity } = cartItems;
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useCart from "../../hooks/useCart";
+import Swal from "sweetalert2";
+const CartFields = ({ cartItems }) => {
+  const { _id, name, image, mainPrice, manufacturer, quantity } = cartItems;
+  const axiosSecure = useAxiosSecure();
+  const [, refetch] = useCart();
+
+  const handleDelete = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to delete this item?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete item!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/user/cart/${id}`)
+          .then((res) => {
+            console.log(res);
+            if (res.data.deletedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: "Deleted!",
+                text: "Item has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
+  };
   return (
     <>
       <tr>
@@ -8,10 +45,7 @@ const CartFields = ({cartItems}) => {
           <div className="flex items-center gap-3">
             <div className="avatar">
               <div className="mask mask-squircle h-12 w-12">
-                <img
-                  src={image}
-                  alt="Avatar Tailwind CSS Component"
-                />
+                <img src={image} alt="Avatar Tailwind CSS Component" />
               </div>
             </div>
             <div>
@@ -35,7 +69,7 @@ const CartFields = ({cartItems}) => {
             {/* Quantity Input */}
             <input
               type="text"
-                value={quantity}
+              value={quantity}
               readOnly
               className="input input-bordered input-sm w-12 text-center"
             />
@@ -50,7 +84,10 @@ const CartFields = ({cartItems}) => {
           </div>
         </td>
         <th>
-          <button className="btn bg-red-600 text-white text-xl ">
+          <button
+            onClick={() => handleDelete(_id)}
+            className="btn bg-red-600 text-white text-xl "
+          >
             <FaRegTrashAlt />
           </button>
         </th>
