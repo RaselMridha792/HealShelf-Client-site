@@ -12,6 +12,7 @@ const UserCart = () => {
   const { user } = useContext(AuthContext);
   const email = user?.email;
   const axiosSecure = useAxiosSecure();
+  const totalPrice = cart?.reduce((total, item) => total +( item.mainPrice*item.quantity), 0);
   const handleDeleteAll = () => {
     Swal.fire({
       title: `Are you sure?`,
@@ -43,8 +44,9 @@ const UserCart = () => {
   return (
     <>
       <section className="my-20 max-w-screen-2xl mx-auto px-5">
+          <h1 className="font-bold text-2xl py-5">My Cart Items ({cart.length})</h1>
         <div className="flex items-center justify-between pt-10">
-          <h1 className="font-bold text-2xl py-5">My Cart Items ()</h1>
+          <h1 className="font-bold text-2xl py-5">Total Price : {totalPrice} </h1>
           <div>
             {!cart.length ? (
               <button disabled className="btn">CheckOut</button>
