@@ -2,13 +2,14 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
 import Swal from "sweetalert2";
+import { useState } from "react";
 const CartFields = ({ cartItems }) => {
   const { _id, name, image, mainPrice, manufacturer, quantity } = cartItems;
   const axiosSecure = useAxiosSecure();
   const [, refetch] = useCart();
+  const [inputValue, setInputValue] = useState(quantity);
 
   const handleDelete = (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "Do you want to delete this item?",
@@ -22,7 +23,6 @@ const CartFields = ({ cartItems }) => {
         axiosSecure
           .delete(`/user/cart/${id}`)
           .then((res) => {
-            console.log(res);
             if (res.data.deletedCount > 0) {
               refetch();
               Swal.fire({
@@ -37,6 +37,28 @@ const CartFields = ({ cartItems }) => {
           });
       }
     });
+  };
+
+  const handleUpdateQuantity = () => {
+    const updatedValue = {inputValue}
+    axiosSecure
+      .patch(`/cart/item/quantity/${_id}`, updatedValue)
+      .then((res) => {
+        console.log(res);
+        if(res.data.modifiedCount > 0){
+          Swal.fire({
+            title: "quantity updated",
+            icon: "success",
+            draggable: true,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          refetch()
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <>
@@ -55,38 +77,20 @@ const CartFields = ({ cartItems }) => {
         </td>
         <td>{manufacturer}</td>
         <td>${mainPrice}</td>
-        <td>
-          <div className="flex items-center justify-center gap-4 p-4">
-            {/* Decrease Button */}
-            <button
-              //   onClick={handleDecrease}
-              className="btn btn-outline btn-sm"
-              //   disabled={quantity <= 1}
-            >
-              -
-            </button>
-
-            {/* Quantity Input */}
-            <input
-              type="text"
-              value={quantity}
-              readOnly
-              className="input input-bordered input-sm w-12 text-center"
-            />
-
-            {/* Increase Button */}
-            <button
-              //   onClick={handleIncrease}
-              className="btn btn-outline btn-sm"
-            >
-              +
-            </button>
-          </div>
+        <td className="join">
+          <input
+            type="number"
+            name="quantityField"
+            onBlur={handleUpdateQuantity}
+            onChange={(e) => setInputValue(e.target.value)}
+            defaultValue={quantity}
+            className="input input-bordered w-20 rounded-none join-item"
+          />
         </td>
         <th>
           <button
             onClick={() => handleDelete(_id)}
-            className="btn bg-red-600 text-white text-xl "
+            className="btn bg-red-600 text-white text-xl"
           >
             <FaRegTrashAlt />
           </button>

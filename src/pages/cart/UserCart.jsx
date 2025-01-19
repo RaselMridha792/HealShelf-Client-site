@@ -5,6 +5,7 @@ import CartFields from "./CartFields";
 import { AuthContext } from "../../Context/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const UserCart = () => {
   const [cart, refetch, isLoading] = useCart();
@@ -26,7 +27,7 @@ const UserCart = () => {
           .delete(`/user/cart/delete-all/${email}`)
           .then((res) => {
             console.log(res);
-            refetch()
+            refetch();
           })
           .catch((error) => {
             console.log(error);
@@ -44,6 +45,15 @@ const UserCart = () => {
       <section className="my-20 max-w-screen-2xl mx-auto px-5">
         <div className="flex items-center justify-between pt-10">
           <h1 className="font-bold text-2xl py-5">My Cart Items ()</h1>
+          <div>
+            {!cart.length ? (
+              <button disabled className="btn">CheckOut</button>
+            ) : (
+              <Link to="/dashboard/checkout" className="btn btn-neutral">
+                CheckOut
+              </Link>
+            )}
+          </div>
           <div>
             <button onClick={handleDeleteAll} className="btn btn-neutral">
               clear cart
@@ -67,7 +77,7 @@ const UserCart = () => {
               {isLoading ? (
                 <Loader></Loader>
               ) : (
-                cart.map((cartItems) => (
+                cart?.map((cartItems) => (
                   <CartFields
                     key={cartItems._id}
                     cartItems={cartItems}

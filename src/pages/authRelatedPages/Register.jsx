@@ -146,7 +146,7 @@ const Register = () => {
                   required
                   className="select select-bordered w-full"
                 >
-                  <option>User</option>
+                  <option>customer</option>
                   <option>Seller</option>
                 </select>
               </div>

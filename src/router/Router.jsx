@@ -11,6 +11,7 @@ import CustomerHome from "../pages/DashboardLayouts/customer/CustomerHome";
 import ShopNow from "../pages/shop/ShopNow";
 import CategoryDetails from "../pages/categoryDetails/CategoryDetails";
 import UserCart from "../pages/cart/UserCart";
+import Checkout from "../pages/DashboardLayouts/Checkout/Checkout";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
         path: 'manage-user',
         element: <ManageUser></ManageUser>
       },
+      {
+        path: 'checkout',
+        element: <Checkout></Checkout>
+      }
     ]
   }
 ]);

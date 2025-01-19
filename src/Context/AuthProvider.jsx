@@ -36,29 +36,30 @@ const AuthProvider = ({ children }) => {
   };
 
   const signInGoogle = () => {
+    setLoader(true)
     return signInWithPopup(auth, provider);
   };
 
   const logOutUser = () => {
+    setLoader(true)
     return signOut(auth);
   };
 
   useEffect(() => {
     const unSubcribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        setLoader(false);
         setUser(currentUser);
-
         // get token and store to local storage
         const userInfo = { email: currentUser.email };
         axiosPublic.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
             localStorage.setItem("access-token", res.data.token);
+            setLoader(false);
           }
         });
       } else {
-        setLoader(false);
-        setUser(null);
+        setUser(null); 
+        setLoader(true);
         localStorage.removeItem('access-token')
       }
     });
