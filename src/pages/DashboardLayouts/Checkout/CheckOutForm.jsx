@@ -4,6 +4,7 @@ import { AuthContext } from "../../../Context/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCart from "../../../hooks/useCart";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutForm = () => {
   const stripe = useStripe();
@@ -11,6 +12,7 @@ const CheckOutForm = () => {
   const [error, setError] = useState("");
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
   const [cart] = useCart();
   const [clientSecret, setClientSecret] = useState("");
   const [TransactionId, setTransactionId] = useState('');
@@ -83,6 +85,9 @@ const CheckOutForm = () => {
 
         const res = await axiosSecure.post('/payments', payment);
         console.log('payment saved', res);
+        if(res){
+          navigate('/invoice')
+        }
       }
     }
   };

@@ -1,4 +1,4 @@
-import { createBrowserRouter} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import HomaPage from "../pages/HomeLayouts/HomaPage";
 import Login from "../pages/authRelatedPages/Login";
 import MainPage from "../main/MainPage";
@@ -12,62 +12,89 @@ import ShopNow from "../pages/shop/ShopNow";
 import CategoryDetails from "../pages/categoryDetails/CategoryDetails";
 import UserCart from "../pages/cart/UserCart";
 import Checkout from "../pages/DashboardLayouts/Checkout/Checkout";
+import Invoice from "../pages/invoice/Invoice";
+import PaymentHistory from "../pages/DashboardLayouts/user/PaymentHistory";
+import AdminRoutes from "./privetRoutes/AdminRoutes";
+import PrivetRoutes from "./privetRoutes/PrivetRoutes";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainPage></MainPage>,
     children: [
-        {
-            path: '/',
-            element: <HomaPage></HomaPage>
-        },
-        {
-            path: '/login',
-            element: <Login></Login>
-        },
-        {
-            path: '/register',
-            element: <Register></Register>
-        },
-        {
-          path: '/shop-now',
-          element: <ShopNow></ShopNow>
-        },
-        {
-          path: '/category/:category',
-          element: <CategoryDetails></CategoryDetails>
-        },
-        {
-          path: '/cart',
-          element: <UserCart></UserCart>
-        }
-    ]
+      {
+        path: "/",
+        element: <HomaPage></HomaPage>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "/shop-now",
+        element: <ShopNow></ShopNow>,
+      },
+      {
+        path: "/category/:category",
+        element: <CategoryDetails></CategoryDetails>,
+      },
+      {
+        path: "/cart",
+        element: (
+          <PrivetRoutes>
+            {" "}
+            <UserCart></UserCart>
+          </PrivetRoutes>
+        ),
+      },
+    ],
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: <Dashboard></Dashboard>,
     children: [
       {
-        path: 'admin-home',
-        element: <AdminHome></AdminHome>
+        path: "admin-home",
+        element: (
+          <AdminRoutes>
+            <AdminHome></AdminHome>
+          </AdminRoutes>
+        ),
       },
       {
-        path: 'seller-home',
-        element: <SellerHome></SellerHome>
+        path: "manage-user",
+        element: (
+          <AdminRoutes>
+            <ManageUser></ManageUser>
+          </AdminRoutes>
+        ),
+      },
+      // seller routes
+      {
+        path: "seller-home",
+        element: <SellerHome></SellerHome>,
+      },
+      // user routes
+      {
+        path: "customer-home",
+        element: <CustomerHome />,
       },
       {
-        path: 'customer-home',
-        element: <CustomerHome />
+        path: "payment-management",
+        element: <PaymentHistory></PaymentHistory>,
       },
       {
-        path: 'manage-user',
-        element: <ManageUser></ManageUser>
+        path: "checkout",
+        element: <Checkout></Checkout>,
       },
       {
-        path: 'checkout',
-        element: <Checkout></Checkout>
-      }
-    ]
-  }
+        path: "invoice",
+        element: <Invoice></Invoice>,
+      },
+    ],
+  },
 ]);

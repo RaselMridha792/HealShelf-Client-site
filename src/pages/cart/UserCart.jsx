@@ -44,11 +44,11 @@ const UserCart = () => {
   return (
     <>
       <section className="my-20 max-w-screen-2xl mx-auto px-5">
-          <h1 className="font-bold text-2xl py-5">My Cart Items ({cart.length})</h1>
-        <div className="flex items-center justify-between pt-10">
-          <h1 className="font-bold text-2xl py-5">Total Price : {totalPrice} </h1>
+          <h1 className="font-bold md:text-2xl text-lg py-5">My Cart Items ({cart?.length})</h1>
+        <div className="flex flex-col md:flex-row gap-5 items-center justify-between pt-10">
+          <h1 className="font-bold md:text-2xl text-lg py-5">Total Price : {totalPrice} </h1>
           <div>
-            {!cart.length ? (
+            {!cart?.length ? (
               <button disabled className="btn">CheckOut</button>
             ) : (
               <Link to="/dashboard/checkout" className="btn btn-neutral">

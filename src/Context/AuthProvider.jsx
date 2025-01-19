@@ -14,17 +14,20 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
 export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [loader, setLoader] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const provider = new GoogleAuthProvider();
   const axiosPublic = useAxiosPublic();
 
   const CreateUser = (email, password) => {
+    setLoading(true)
     setLoader(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const LoginUser = (email, password) => {
     setLoader(true);
+    setLoading(true)
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -37,11 +40,13 @@ const AuthProvider = ({ children }) => {
 
   const signInGoogle = () => {
     setLoader(true)
+    setLoading(true)
     return signInWithPopup(auth, provider);
   };
 
   const logOutUser = () => {
     setLoader(true)
+    setLoading(true)
     return signOut(auth);
   };
 
@@ -55,11 +60,13 @@ const AuthProvider = ({ children }) => {
           if (res.data.token) {
             localStorage.setItem("access-token", res.data.token);
             setLoader(false);
+            setLoading(false)
           }
         });
       } else {
         setUser(null); 
         setLoader(true);
+        setLoading(false)
         localStorage.removeItem('access-token')
       }
     });
@@ -77,6 +84,7 @@ const AuthProvider = ({ children }) => {
     upDateUser,
     logOutUser,
     signInGoogle,
+    loading,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

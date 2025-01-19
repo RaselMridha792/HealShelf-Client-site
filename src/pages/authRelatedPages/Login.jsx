@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../assets/authRelated/doctorLogin.png";
 import PrimaryBtn from "../../Components/shared/PrimaryBtn";
 import { useContext } from "react";
@@ -9,9 +9,11 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 const Login = () => {
   const { LoginUser, signInGoogle } = useContext(AuthContext);
-  const navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm();
   const axiosPublic = useAxiosPublic();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
     LoginUser(data.email, data.password)
@@ -25,7 +27,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate('/')
+        navigate(from, { replace: true })
       })
       .catch((error) => {
         console.log(error);
@@ -55,7 +57,7 @@ const Login = () => {
           }else{
             console.log(res)
           }
-          navigate("/");
+          navigate('/');
         });
       })
       .catch((error) => {
