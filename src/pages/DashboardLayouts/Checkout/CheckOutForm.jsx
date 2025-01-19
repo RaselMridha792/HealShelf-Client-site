@@ -66,6 +66,23 @@ const CheckOutForm = () => {
           draggable: true
         });
         setTransactionId(paymentIntent.id)
+
+        // save the payment to the database
+        const payment = {
+          email: user.email,
+          price: totalPrice,
+          date: new Date(),
+          cartId: cart.map(item => item._id),
+          MedicineItemId: cart.map(item => item.id),
+          itemName: cart.map(item => item.name),
+          itemPrice: cart.map(item => item.mainPrice),
+          itemQuantity: cart.map(item => item.quantity),
+          transactionId: paymentIntent.id,
+          status: 'processing',
+        }
+
+        const res = await axiosSecure.post('/payments', payment);
+        console.log('payment saved', res);
       }
     }
   };
