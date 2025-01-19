@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Context/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCart from "../../../hooks/useCart";
+import Swal from "sweetalert2";
 
 const CheckOutForm = () => {
   const stripe = useStripe();
@@ -12,6 +13,7 @@ const CheckOutForm = () => {
   const axiosSecure = useAxiosSecure();
   const [cart] = useCart();
   const [clientSecret, setClientSecret] = useState("");
+  const [TransactionId, setTransactionId] = useState('');
   const totalPrice = cart?.reduce((total, item) => total +( item.mainPrice*item.quantity), 0);
 
   useEffect(() => {
@@ -21,7 +23,6 @@ const CheckOutForm = () => {
         setClientSecret(res.data.clientSecret);
       });
     }, [axiosSecure, totalPrice]);
-    console.log(clientSecret)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -58,11 +59,20 @@ const CheckOutForm = () => {
       console.log('confirm error')
     }else{
       console.log('payment intent', paymentIntent)
+      if(paymentIntent.status === 'succeeded'){
+        Swal.fire({
+          title: `Payment Success!`,
+          icon: "success",
+          draggable: true
+        });
+        setTransactionId(paymentIntent.id)
+      }
     }
   };
 
   return (
     <>
+    <h1 className="text-center text-3xl font-bold">Total Bill: ${totalPrice}</h1>
       <form onSubmit={handleSubmit}>
         {clientSecret && (
           <CardElement
@@ -90,6 +100,7 @@ const CheckOutForm = () => {
           Pay
         </button>
         <p className="text-red-600">{error}</p>
+        <p className="text-green-500">your transaction id: {TransactionId}</p>
       </form>
     </>
   );
