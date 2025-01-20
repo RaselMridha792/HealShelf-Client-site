@@ -13,7 +13,7 @@ const UserCart = () => {
   const email = user?.email;
   const axiosSecure = useAxiosSecure();
   const totalPrices = cart?.reduce((total, item) => total +( item.mainPrice*item.quantity), 0);
-  const totalPrice = Math.round(totalPrices * 100)/ 1000;
+  const totalPrice = Math.round(totalPrices * 100)/ 100;
   const handleDeleteAll = () => {
     Swal.fire({
       title: `Are you sure?`,

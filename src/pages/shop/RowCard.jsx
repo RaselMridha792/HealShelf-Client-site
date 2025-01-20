@@ -13,7 +13,8 @@ const RowCard = ({ product }) => {
   const [, refetch] = useCart();
   const email = user?.email;
 
-  const { _id, name, image, price, manufacturer } = product;
+  const { _id, name, image, price, manufacturer, sellerEmail } = product;
+  const sellerEmails = sellerEmail || 'raselmridha792@gmail.com';
   const mainPrice = parseFloat(price.slice(1, 5));
   const handleOpenModal = () => {
     setSelectedProduct(product);
@@ -34,6 +35,7 @@ const RowCard = ({ product }) => {
       mainPrice,
       manufacturer,
       quantity: 1,
+      sellerEmail: sellerEmails,
     };
     const res = await axiosSecure.post("/products/add-cart", cartData);
     if (res.data.acknowledged) {

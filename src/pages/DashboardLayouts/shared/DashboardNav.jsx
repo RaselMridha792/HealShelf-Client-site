@@ -106,7 +106,7 @@ const DashboardNav = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="payment-management">
+                    <NavLink to="seller-payment-management">
                       <FaMoneyBill1Wave /> Payment History
                     </NavLink>
                   </li>

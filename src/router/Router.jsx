@@ -17,6 +17,9 @@ import PaymentHistory from "../pages/DashboardLayouts/user/PaymentHistory";
 import AdminRoutes from "./privetRoutes/AdminRoutes";
 import PrivetRoutes from "./privetRoutes/PrivetRoutes";
 import ManagePayments from "../pages/DashboardLayouts/admin/ManagePayments";
+import SalesReport from "../pages/DashboardLayouts/admin/SalesReport";
+import ManageMedicine from "../pages/DashboardLayouts/seller/ManageMedicine";
+import SellerPayManagement from "../pages/DashboardLayouts/seller/SellerPayManagement";
 
 export const router = createBrowserRouter([
   {
@@ -71,13 +74,25 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'admin-manage-payments',
-        element: <ManagePayments></ManagePayments>
+        path: "admin-manage-payments",
+        element: <ManagePayments></ManagePayments>,
+      },
+      {
+        path: "sales-report",
+        element: <SalesReport></SalesReport>,
       },
       // seller routes
       {
         path: "seller-home",
         element: <SellerHome></SellerHome>,
+      },
+      {
+        path: "manage-medicine",
+        element: <ManageMedicine></ManageMedicine>,
+      },
+      {
+        path: "seller-payment-management",
+        element: <SellerPayManagement></SellerPayManagement>
       },
       // user routes
       {

@@ -72,11 +72,11 @@ const ManagePayments = () => {
                           )}
                           {payment.status == "paid" && (
                             <option name="paid" value="paid">
-                              paid
+                              accepted
                             </option>
                           )}
                           <option name="paid" value="paid">
-                            paid
+                            accept payment
                           </option>
                         </select>
                       </td>

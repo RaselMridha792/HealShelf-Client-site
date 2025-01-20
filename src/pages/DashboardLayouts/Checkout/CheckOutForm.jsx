@@ -17,7 +17,7 @@ const CheckOutForm = () => {
   const [clientSecret, setClientSecret] = useState("");
   const [TransactionId, setTransactionId] = useState('');
   const totalPrices = cart?.reduce((total, item) => total +( item.mainPrice*item.quantity), 0);
-  const totalPrice = Math.round(totalPrices * 100)/ 1000;
+  const totalPrice = Math.round(totalPrices * 100)/ 100;
 
   useEffect(() => {
     axiosSecure
@@ -80,14 +80,14 @@ const CheckOutForm = () => {
           itemName: cart.map(item => item.name),
           itemPrice: cart.map(item => item.mainPrice),
           itemQuantity: cart.map(item => item.quantity),
+          sellerEmail: cart.map(item =>item.sellerEmail),
           transactionId: paymentIntent.id,
           status: 'processing',
         }
-
         const res = await axiosSecure.post('/payments', payment);
         console.log('payment saved', res);
         if(res){
-          navigate('/invoice')
+          // navigate('/invoice')
         }
       }
     }
