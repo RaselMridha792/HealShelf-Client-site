@@ -16,7 +16,8 @@ const CheckOutForm = () => {
   const [cart] = useCart();
   const [clientSecret, setClientSecret] = useState("");
   const [TransactionId, setTransactionId] = useState('');
-  const totalPrice = cart?.reduce((total, item) => total +( item.mainPrice*item.quantity), 0);
+  const totalPrices = cart?.reduce((total, item) => total +( item.mainPrice*item.quantity), 0);
+  const totalPrice = Math.round(totalPrices * 100)/ 1000;
 
   useEffect(() => {
     axiosSecure

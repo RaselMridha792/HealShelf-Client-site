@@ -73,7 +73,7 @@ const DashboardNav = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="payment-management">
+                    <NavLink to="admin-manage-payments">
                       <FaMoneyBill></FaMoneyBill> Payment Management
                     </NavLink>
                   </li>

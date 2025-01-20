@@ -16,6 +16,7 @@ import Invoice from "../pages/invoice/Invoice";
 import PaymentHistory from "../pages/DashboardLayouts/user/PaymentHistory";
 import AdminRoutes from "./privetRoutes/AdminRoutes";
 import PrivetRoutes from "./privetRoutes/PrivetRoutes";
+import ManagePayments from "../pages/DashboardLayouts/admin/ManagePayments";
 
 export const router = createBrowserRouter([
   {
@@ -59,11 +60,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "admin-home",
-        element: (
-          <AdminRoutes>
-            <AdminHome></AdminHome>
-          </AdminRoutes>
-        ),
+        element: <AdminHome></AdminHome>,
       },
       {
         path: "manage-user",
@@ -72,6 +69,10 @@ export const router = createBrowserRouter([
             <ManageUser></ManageUser>
           </AdminRoutes>
         ),
+      },
+      {
+        path: 'admin-manage-payments',
+        element: <ManagePayments></ManagePayments>
       },
       // seller routes
       {

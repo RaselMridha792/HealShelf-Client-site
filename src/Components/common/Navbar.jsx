@@ -4,6 +4,7 @@ import { AuthContext } from "../../Context/AuthProvider";
 import { FaCartShopping } from "react-icons/fa6";
 import useRole from "../../hooks/useRole";
 import useCart from "../../hooks/useCart";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logOutUser } = useContext(AuthContext);
@@ -13,7 +14,13 @@ const Navbar = () => {
   const handleSignOut = () => {
     logOutUser()
       .then(() => {
-        alert("successfully signed Out");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Logout successful",
+          showConfirmButton: false,
+          timer: 1500
+        });
       })
       .catch((error) => {
         console.log(error);

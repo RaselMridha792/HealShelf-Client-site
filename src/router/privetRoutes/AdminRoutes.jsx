@@ -4,17 +4,14 @@ import useRole from "../../hooks/useRole";
 import { useContext } from "react";
 
 const AdminRoutes = ({ children }) => {
-  const { user, loader, logOutUser } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const [role] = useRole();
-  const navigate = useNavigate()
-  if (loader) {
+  console.log(role)
+
+  if (loading) {
     return <span className="loading loading-spinner loading-lg"></span>;
   }
-  if (role !== "admin") {
-    logOutUser();
-    navigate()
-  }
-  if (user && role == "admin") {
+  if (role) {
     return children;
   }
   return (
