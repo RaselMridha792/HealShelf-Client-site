@@ -44,9 +44,9 @@ const DashboardNav = () => {
           </div>
         </div>
       </section>
-      <section className="fixed lg:relative z-10">
+      <section className="fixed  lg:relative z-10">
         <div
-          className={`min-h-screen flex-col text-white pt-24 bg-gray-500 lg:flex lg:w-96 ${
+          className={`h-full flex-col text-white pt-24 bg-gray-500 lg:flex lg:w-96 ${
             sidebar ? "w-72" : "hidden"
           }`}
         >
@@ -83,7 +83,7 @@ const DashboardNav = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="banner-advertise">
+                    <NavLink to="admin-banner-ads">
                       <FaAd></FaAd>
                       Manage Banner Advertise
                     </NavLink>
@@ -111,7 +111,7 @@ const DashboardNav = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="sales-report">
+                    <NavLink to="seller-ads-management">
                       <FaAd></FaAd> Ask for advertisement
                     </NavLink>
                   </li>

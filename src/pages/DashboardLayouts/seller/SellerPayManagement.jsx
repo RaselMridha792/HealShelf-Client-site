@@ -1,8 +1,14 @@
+import { useEffect } from "react";
 import Loader from "../shared/Loader";
 import useSellerPayment from "./useSellerPayment";
 
 const SellerPayManagement = () => {
   const [sellerPayment, refetch, isLoading] = useSellerPayment();
+  useEffect(() => {
+    if (!isLoading) {
+      refetch();
+    }
+  }, [refetch, isLoading]);
   return (
     <>
       <div>
@@ -20,7 +26,7 @@ const SellerPayManagement = () => {
                     <th>Buyer Email</th>
                     <th>transaction id</th>
                     <th>Date</th>
-                    <th>Total price</th>
+                    <th>Total Buy</th>
                     <th>Status</th>
                   </tr>
                 </thead>

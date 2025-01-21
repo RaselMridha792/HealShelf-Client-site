@@ -20,6 +20,8 @@ import ManagePayments from "../pages/DashboardLayouts/admin/ManagePayments";
 import SalesReport from "../pages/DashboardLayouts/admin/SalesReport";
 import ManageMedicine from "../pages/DashboardLayouts/seller/ManageMedicine";
 import SellerPayManagement from "../pages/DashboardLayouts/seller/SellerPayManagement";
+import AskForAdvertise from "../pages/DashboardLayouts/seller/AskForAdvertise";
+import ManageBanner from "../pages/DashboardLayouts/admin/ManageBanner";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +76,10 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: 'admin-banner-ads',
+        element: <ManageBanner></ManageBanner>
+      },
+      {
         path: "admin-manage-payments",
         element: <ManagePayments></ManagePayments>,
       },
@@ -92,7 +98,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "seller-payment-management",
-        element: <SellerPayManagement></SellerPayManagement>
+        element: <SellerPayManagement></SellerPayManagement>,
+      },
+      {
+        path: "seller-ads-management",
+        element: <AskForAdvertise></AskForAdvertise>,
       },
       // user routes
       {

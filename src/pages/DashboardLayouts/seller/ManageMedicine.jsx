@@ -28,7 +28,7 @@ const ManageMedicine = () => {
           </div>
         </dialog>
       </div>
-      <section className="my-20">
+      <section className="my-20 overflow-x-auto">
         <h1 className="text-3xl text-center font-bold ">
           Your Payment History
         </h1>
@@ -39,10 +39,10 @@ const ManageMedicine = () => {
               <thead className="bg-cyan-500 text-white text-lg">
                 <tr>
                   <th>#</th>
-                  <th>name</th>
-                  <th>category</th>
-                  <th>price</th>
-                  <th>Status</th>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Price</th>
                 </tr>
               </thead>
               <tbody>
