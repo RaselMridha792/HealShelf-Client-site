@@ -2,12 +2,12 @@ import AddMedicine from "./AddMedicine";
 import useSellerMedicine from "./useSellerMedicine";
 
 const ManageMedicine = () => {
-    const [sellerMedicine] = useSellerMedicine();
-    console.log(sellerMedicine)
+  const [sellerMedicine] = useSellerMedicine();
+  console.log(sellerMedicine);
 
-    const closeModal = () => {
-        document.getElementById("my_modal_4").close();
-      };
+  const closeModal = () => {
+    document.getElementById("my_modal_4").close();
+  };
 
   return (
     <>
@@ -24,6 +24,9 @@ const ManageMedicine = () => {
           <div className="modal-box w-11/12 max-w-5xl">
             <AddMedicine closeModal={closeModal}></AddMedicine>
             <div className="modal-action">
+              <label onClick={closeModal} className="btn">
+                Close!
+              </label>
             </div>
           </div>
         </dialog>
@@ -51,7 +54,9 @@ const ManageMedicine = () => {
                   sellerMedicine.map((payment, index) => (
                     <tr key={payment._id}>
                       <th>{index + 1}</th>
-                      <td><img className="w-12 h-12" src={payment.image} alt="" /></td>
+                      <td>
+                        <img className="w-12 h-12" src={payment.image} alt="" />
+                      </td>
                       <td>{payment.name}</td>
                       <td>{payment.category}</td>
                       <td>{payment.price}</td>
