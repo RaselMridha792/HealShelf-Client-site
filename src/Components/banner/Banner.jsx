@@ -8,7 +8,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import BannerCart from "./BannerCart";
+import useBannerData from "../../hooks/useBannerData";
+import Loader from "../../pages/DashboardLayouts/shared/Loader";
 const Banner = () => {
+  const [data, isLoading] = useBannerData();
   return (
     <>
       <section className="mt-12">
@@ -18,7 +21,7 @@ const Banner = () => {
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             spaceBetween={0}
             autoplay={true}
-              slidesPerView={1}
+            slidesPerView={1}
             navigation
             //   pagination={{ clickable: true }}
             //   scrollbar={{ draggable: true }}
@@ -28,12 +31,17 @@ const Banner = () => {
                       <DiscountCard product={product}></DiscountCard>
                     </SwiperSlide>
                   ))} */}
-            <SwiperSlide>
-              <BannerCart></BannerCart>
-            </SwiperSlide>
-            <SwiperSlide>
-              <BannerCart></BannerCart>
-            </SwiperSlide>
+            {isLoading ? (
+              <>
+                <Loader></Loader>
+              </>
+            ) : (
+              data?.map((singleData) => (
+                <SwiperSlide key={singleData.map}>
+                  <BannerCart heading={singleData.heading} subHeading={singleData.subHeading} image={singleData.image}></BannerCart>
+                </SwiperSlide>
+              ))
+            )}
           </Swiper>
         </header>
       </section>
