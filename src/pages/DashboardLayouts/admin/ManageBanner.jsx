@@ -1,12 +1,27 @@
+import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useBanner from "./useBanner";
 
 const ManageBanner = () => {
-  const [data, isLoading] = useBanner();
+  const [data, isLoading, refetch] = useBanner();
   const axiosSecure = useAxiosSecure();
 
-  const handleStatus = (id) => {
-    console.log(id);
+
+  const handleStatus = (id, currentStatus) => {
+    const newStatus = currentStatus === "accept" ? "pending" : "accept";
+    axiosSecure.patch(`/admin/change-status/${id}`,
+      { status: newStatus }
+    ).then(res =>{
+      if(res.data.modifiedCount > 0){
+        refetch()
+        Swal.fire({
+          title: "Status changed!",
+          icon: "success",
+          draggable: false,
+          timer: 1500,
+        });
+      }
+    }).catch(error => console.log(error.message))
   };
   return (
     <>
@@ -49,8 +64,8 @@ const ManageBanner = () => {
                     <input
                       type="checkbox"
                       className="toggle"
-                      checked={banners.status == 'accept'}
-                      onChange={() => handleStatus(banners._id)}
+                      checked={banners.status === "accept"}
+                      onChange={() => handleStatus(banners._id, banners.status)}
                     />
                   </th>
                 </tr>
