@@ -4,11 +4,13 @@ import useCategories from "../shared/loadDataHook/useCategories";
 import Loader from "../shared/Loader";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import UpdateCategory from "./UpdateCategory";
+import { useState } from "react";
 
 const ManageCategory = () => {
   const [categories, isLoading, refetch] = useCategories();
   const axiosSecure = useAxiosSecure();
-  console.log(categories);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const handleAddCategory = async (e) => {
     e.preventDefault();
@@ -33,6 +35,11 @@ const ManageCategory = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const closeModal = () => {
+    setSelectedCategory(null);
+    document.getElementById("my_modal_5").close();
   };
 
   const handleDelete = (id) => {
@@ -178,7 +185,27 @@ const ManageCategory = () => {
                     </td>
                     <td>{category.categoryName}</td>
                     <td>
-                      <button className="btn  font-bold flex gap-1 btn-warning">
+                      <dialog id="my_modal_5" className="modal">
+                        <div className="modal-box lg:w-8/12">
+                          <UpdateCategory
+                            singleCategory={selectedCategory}
+                            refetch={refetch}
+                            closeModal={closeModal}
+                          ></UpdateCategory>
+                          <div className="modal-action">
+                            <form method="dialog">
+                              <button className="btn">Close</button>
+                            </form>
+                          </div>
+                        </div>
+                      </dialog>
+                      <button
+                        onClick={() => {
+                          setSelectedCategory(category);
+                          document.getElementById("my_modal_5").showModal();
+                        }}
+                        className="btn  font-bold flex gap-1 btn-warning"
+                      >
                         <MdUpdate className="text-xl" /> Update
                       </button>
                     </td>
