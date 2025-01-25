@@ -1,23 +1,28 @@
 import useProducts from "../DashboardLayouts/shared/loadDataHook/useProducts";
 import RowCard from "./RowCard";
 import Loader from "../DashboardLayouts/shared/Loader";
-import { FaList } from "react-icons/fa";
+import { FaList, FaSearch } from "react-icons/fa";
 import { useState } from "react";
 
 const ShopNow = () => {
   const [sort, setSort] = useState(false);
-  const [products, isLoading] = useProducts(sort);
+  const [search, setSearch] = useState('');
+  const [products, isLoading] = useProducts(sort, search);
   return (
     <>
       <section className="my-32 max-w-screen-2xl mx-auto px-5">
         <h1 className="text-3xl text-center font-bold">Shop Now</h1>
         <hr className="my-5" />
         <div className="flex gap-5 justify-between mb-10">
+          <div className="join w-full md:w-8/12">
           <input
+          onKeyUp={(e)=>setSearch(e.target.value)}
             type="text"
-            className="input input-bordered w-full md:w-8/12"
+            className="input input-bordered w-full md:w-8/12 join-item"
             placeholder="search medicine"
           />
+          <button className="btn join-item"><FaSearch></FaSearch></button>
+          </div>
           <button onClick={() => setSort(!sort)} className={`btn ${sort?'btn-success':'btn-neutral'}`}>
             <FaList></FaList> {sort?"sorted by price":"short by price"}
           </button> 
