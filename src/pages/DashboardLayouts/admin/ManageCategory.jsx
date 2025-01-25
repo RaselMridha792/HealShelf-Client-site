@@ -11,6 +11,9 @@ const ManageCategory = () => {
   const [categories, isLoading, refetch] = useCategories();
   const axiosSecure = useAxiosSecure();
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const closeModal = () => {
+    document.getElementById("my_modal_5").close();
+  };
 
   const handleAddCategory = async (e) => {
     e.preventDefault();
@@ -35,11 +38,6 @@ const ManageCategory = () => {
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  const closeModal = () => {
-    setSelectedCategory(null);
-    document.getElementById("my_modal_5").close();
   };
 
   const handleDelete = (id) => {

@@ -40,7 +40,7 @@ const SalesReport = () => {
                 <td>acme</td>
                 <td>{payment.sellerEmail || "raselmridha792@gmail.com"} </td>
                 <td>{payment.email}</td>
-                <td>${payment.price}</td>
+                <td>${payment.price.toFixed(2)}</td>
                 <td>{payment.date}</td>
               </tr>
             ))}

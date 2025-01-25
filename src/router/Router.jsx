@@ -66,7 +66,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "admin-home",
-        element: <AdminHome></AdminHome>,
+        element: (
+          <AdminRoutes>
+            <AdminHome></AdminHome>
+          </AdminRoutes>
+        ),
       },
       {
         path: "manage-user",
@@ -77,20 +81,36 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'manage-category',
-        element: <ManageCategory></ManageCategory>
+        path: "manage-category",
+        element: (
+          <AdminRoutes>
+            <ManageCategory></ManageCategory>
+          </AdminRoutes>
+        ),
       },
       {
-        path: 'admin-banner-ads',
-        element: <ManageBanner></ManageBanner>
+        path: "admin-banner-ads",
+        element: (
+          <AdminRoutes>
+            <ManageBanner></ManageBanner>
+          </AdminRoutes>
+        ),
       },
       {
         path: "admin-manage-payments",
-        element: <ManagePayments></ManagePayments>,
+        element: (
+          <AdminRoutes>
+            <ManagePayments></ManagePayments>
+          </AdminRoutes>
+        ),
       },
       {
         path: "sales-report",
-        element: <SalesReport></SalesReport>,
+        element: (
+          <AdminRoutes>
+            <SalesReport></SalesReport>,
+          </AdminRoutes>
+        ),
       },
       // seller routes
       {

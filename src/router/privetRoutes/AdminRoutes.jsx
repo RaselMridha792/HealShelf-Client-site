@@ -1,17 +1,19 @@
 import { AuthContext } from "../../Context/AuthProvider";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import useRole from "../../hooks/useRole";
 import { useContext } from "react";
 
 const AdminRoutes = ({ children }) => {
-  const { user, loading } = useContext(AuthContext);
-  const [role] = useRole();
-  console.log(role)
+  const { loading, logOutUser } = useContext(AuthContext);
+  const [role, isLoading] = useRole();
 
-  if (loading) {
+  if (loading || isLoading) {
     return <span className="loading loading-spinner loading-lg"></span>;
   }
-  if (role) {
+  if (role !== "admin") {
+    return logOutUser();
+  }
+  if (role == "admin") {
     return children;
   }
   return (
