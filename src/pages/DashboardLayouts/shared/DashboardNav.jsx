@@ -46,7 +46,7 @@ const DashboardNav = () => {
       </section>
       <section className="fixed  lg:relative z-10">
         <div
-          className={`h-full flex-col text-white pt-24 bg-gray-500 lg:flex lg:w-96 ${
+          className={`h-full min-h-screen flex-col text-white pt-24 bg-gray-500 lg:flex lg:w-96 ${
             sidebar ? "w-72" : "hidden"
           }`}
         >
