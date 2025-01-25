@@ -22,6 +22,7 @@ import ManageMedicine from "../pages/DashboardLayouts/seller/ManageMedicine";
 import SellerPayManagement from "../pages/DashboardLayouts/seller/SellerPayManagement";
 import AskForAdvertise from "../pages/DashboardLayouts/seller/AskForAdvertise";
 import ManageBanner from "../pages/DashboardLayouts/admin/ManageBanner";
+import ManageCategory from "../pages/DashboardLayouts/admin/ManageCategory";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ export const router = createBrowserRouter([
             <ManageUser></ManageUser>
           </AdminRoutes>
         ),
+      },
+      {
+        path: 'manage-category',
+        element: <ManageCategory></ManageCategory>
       },
       {
         path: 'admin-banner-ads',

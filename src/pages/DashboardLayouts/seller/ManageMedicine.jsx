@@ -31,9 +31,9 @@ const ManageMedicine = () => {
           </div>
         </dialog>
       </div>
-      <section className="my-20 overflow-x-auto">
+      <section className="mb-10 overflow-x-auto">
         <h1 className="text-3xl text-center font-bold ">
-          Your Payment History
+         
         </h1>
         <div className="mt-10">
           <div className="overflow-x-auto">
