@@ -10,7 +10,6 @@ const Navbar = () => {
   const { user, logOutUser } = useContext(AuthContext);
   const [role] = useRole();
   const [cart] = useCart();
-  console.log(role)
   const userRole = role;
   const handleSignOut = () => {
     logOutUser()

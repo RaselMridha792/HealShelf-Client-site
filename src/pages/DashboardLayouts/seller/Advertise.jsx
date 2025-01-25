@@ -82,7 +82,7 @@ const Advertise = ({ refetch, closeModal }) => {
                 name="email"
                 {...register("email")}
                 placeholder="email"
-                value={user.email}
+                value={user?.email}
                 className="input input-bordered w-full text-gray-400"
               />
             </label>

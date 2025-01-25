@@ -17,9 +17,7 @@ const SellerHome = () => {
       return res.data;
     },
   });
-  console.log(data);
   const totalPrice = data?.totalPrice.toFixed(2);
-  console.log(totalPrice);
   return (
     <>
       <section className="my-10">

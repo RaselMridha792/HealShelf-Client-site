@@ -3,8 +3,6 @@ import useSellerMedicine from "./useSellerMedicine";
 
 const ManageMedicine = () => {
   const [sellerMedicine] = useSellerMedicine();
-  console.log(sellerMedicine);
-
   const closeModal = () => {
     document.getElementById("my_modal_4").close();
   };

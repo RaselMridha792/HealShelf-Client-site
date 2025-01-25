@@ -23,7 +23,6 @@ import SellerPayManagement from "../pages/DashboardLayouts/seller/SellerPayManag
 import AskForAdvertise from "../pages/DashboardLayouts/seller/AskForAdvertise";
 import ManageBanner from "../pages/DashboardLayouts/admin/ManageBanner";
 import ManageCategory from "../pages/DashboardLayouts/admin/ManageCategory";
-
 export const router = createBrowserRouter([
   {
     path: "/",

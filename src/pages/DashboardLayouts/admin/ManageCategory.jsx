@@ -12,6 +12,7 @@ const ManageCategory = () => {
   const axiosSecure = useAxiosSecure();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const closeModal = () => {
+    setSelectedCategory(null);
     document.getElementById("my_modal_5").close();
   };
 
