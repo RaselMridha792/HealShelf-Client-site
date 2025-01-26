@@ -1,11 +1,10 @@
 import { useContext, useState } from "react";
 import { FaAd, FaMoneyBill, FaUserAlt, FaUsers } from "react-icons/fa";
-import { IoIosNotifications } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
 import { LiaMoneyCheckAltSolid } from "react-icons/lia";
 import { MdOutlineHome } from "react-icons/md";
 import { TbCategoryFilled } from "react-icons/tb";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider";
 import { GiMedicines } from "react-icons/gi";
 import { FaMoneyBill1Wave } from "react-icons/fa6";
@@ -30,16 +29,13 @@ const DashboardNav = () => {
             </button>
             <div className="flex justify-between items-center w-full">
               <h1 className="text-2xl uppercase font-bold">healShelf</h1>
-              <div className="flex items-center gap-5">
-                <button className="btn btn-ghost text-3xl">
-                  <IoIosNotifications />
-                </button>
+              <Link to='/profile' className="flex items-center gap-5">
                 <div className="avatar">
                   <div className="w-10 rounded-full">
                     <img src={user?.photoURL} />
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -139,7 +135,7 @@ const DashboardNav = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/user-account">
+                  <NavLink to="/profile">
                     <FaUserAlt className="text-xl" /> Account
                   </NavLink>
                 </li>

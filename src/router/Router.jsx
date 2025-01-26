@@ -22,6 +22,7 @@ import SellerPayManagement from "../pages/DashboardLayouts/seller/SellerPayManag
 import AskForAdvertise from "../pages/DashboardLayouts/seller/AskForAdvertise";
 import ManageBanner from "../pages/DashboardLayouts/admin/ManageBanner";
 import ManageCategory from "../pages/DashboardLayouts/admin/ManageCategory";
+import UserProfile from "../pages/userProfile/UserProfile";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <HomaPage></HomaPage>,
+      },
+      {
+        path: '/profile',
+        element: <UserProfile></UserProfile>
       },
       {
         path: "/login",

@@ -101,7 +101,7 @@ const Navbar = () => {
                   </div>
                   <ul className="dropdown-content z-10 mt-2 menu p-5 shadow bg-cyan-400 rounded-box w-52">
                     <li>
-                      <NavLink to="/user-profile">Update Profile</NavLink>
+                      <NavLink to="/profile">Update Profile</NavLink>
                     </li>
                     <li>
                       {userRole == "admin" && (
