@@ -7,7 +7,6 @@ import Dashboard from "../pages/DashboardLayouts/Dashboard";
 import AdminHome from "../pages/DashboardLayouts/admin/AdminHome";
 import ManageUser from "../pages/DashboardLayouts/admin/ManageUser";
 import SellerHome from "../pages/DashboardLayouts/seller/SellerHome";
-import CustomerHome from "../pages/DashboardLayouts/customer/CustomerHome";
 import ShopNow from "../pages/shop/ShopNow";
 import CategoryDetails from "../pages/categoryDetails/CategoryDetails";
 import UserCart from "../pages/cart/UserCart";
@@ -131,7 +130,7 @@ export const router = createBrowserRouter([
       // user routes
       {
         path: "customer-home",
-        element: <CustomerHome />,
+        element: <PaymentHistory></PaymentHistory>,
       },
       {
         path: "payment-management",

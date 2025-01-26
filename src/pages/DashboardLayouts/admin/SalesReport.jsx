@@ -1,11 +1,12 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DownloadTableExcel } from "react-export-table-to-excel";
-import { FaDownload } from "react-icons/fa";
+import { FaDownload, FaList } from "react-icons/fa";
 import usePayments from "./usePayments";
 import Loader from "../shared/Loader";
 
 const SalesReport = () => {
-  const [payments, isLoading, refetch] = usePayments();
+  const [sort, setSort] = useState(false);
+  const [payments, isLoading, refetch] = usePayments(sort);
   const data = Array.isArray(payments) ? payments : [];
   useEffect(() => {
     refetch();
@@ -14,8 +15,15 @@ const SalesReport = () => {
   if (isLoading) {
     return <Loader></Loader>;
   }
+  const item = data?.map(single => single.itemName);
+  const buyItem = item[0]
+  console.log(buyItem)
   return (
     <div>
+      <div className="py-10 flex items-center justify-between">
+        <h1 className="text-3xl font-bold capitalize">Sales Report</h1>
+        <button onClick={()=>setSort(!sort)} className={`btn ${sort?'btn-success':'btn-neutral'}`}><FaList></FaList> {sort?'filtered by date':'filter By Date'} </button>
+      </div>
       <DownloadTableExcel
         filename="users table"
         sheet="users"
@@ -37,8 +45,12 @@ const SalesReport = () => {
             </tr>
             {data?.map((payment) => (
               <tr key={payment._id}>
-                <td>acme</td>
-                <td>{payment.sellerEmail || "raselmridha792@gmail.com"} </td>
+                <td>{buyItem.map((item, idx) => <li key={idx}>{item}</li>)}</td>
+                <td>
+                  {payment.sellerEmail
+                    ? payment.sellerEmail
+                    : "raselmridha792@gmail.com"}{" "}
+                </td>
                 <td>{payment.email}</td>
                 <td>${payment.price.toFixed(2)}</td>
                 <td>{payment.date}</td>

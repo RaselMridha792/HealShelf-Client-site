@@ -111,7 +111,7 @@ const Navbar = () => {
                         <NavLink to="/dashboard/seller-home">Dashboard</NavLink>
                       )}
                       {userRole == "customer" && (
-                        <NavLink to="/dashboard/customer-home">
+                        <NavLink to="/dashboard/payment-management">
                           Dashboard
                         </NavLink>
                       )}

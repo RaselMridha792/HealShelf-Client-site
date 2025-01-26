@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import PrimaryBtn from "../../Components/shared/PrimaryBtn";
 import logo from "../../assets/authRelated/doctorRegister.png";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import useUploadImage from "../../hooks/useUploadImage";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
@@ -13,7 +13,9 @@ const Register = () => {
   const { CreateUser, upDateUser, signInGoogle } = useContext(AuthContext);
   const saveImgBB = useUploadImage();
   const axiosPublic = useAxiosPublic();
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const passwordRegex =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&*()]).{6,}$/;
 
   const { register, handleSubmit, reset } = useForm();
 
@@ -21,7 +23,19 @@ const Register = () => {
     // sent imagedata img bb
     const image = data.file[0];
     const image_url = await saveImgBB(image);
-    CreateUser(data.email, data.password)
+    const password = data.password
+    if (password.length < 6) {
+      setErrorMessage("password mast be 6 caracter or longer");
+      return;
+    }
+    if (!passwordRegex.test(password)) {
+      setErrorMessage(
+        "password mast be at least one uppercase, lowercase, letter and special caracters"
+      );
+      return;
+    }
+    setErrorMessage("");
+    CreateUser(data.email, password)
       .then(() => {
         // update user profile
         const name = data.name;
@@ -178,6 +192,7 @@ const Register = () => {
                   <Link to="/login">please Login</Link>
                 </span>
               </p>
+              <p className="text-red-500">{errorMessage}</p>
             </form>
           </div>
         </div>

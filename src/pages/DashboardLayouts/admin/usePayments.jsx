@@ -1,12 +1,12 @@
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 
-const usePayments = () => {
+const usePayments = (sort) => {
     const axiosSecure = useAxiosSecure();
     const { data: payments, isLoading, refetch } = useQuery({
-      queryKey: ["admin-stats"],
+      queryKey: ["admin-stats", sort],
       queryFn: async () => {
-        const res = await axiosSecure.get("/admin-stats");
+        const res = await axiosSecure.get(`/admin-stats?sort=${sort}`);
         return res.data.orders;
       },
     });
