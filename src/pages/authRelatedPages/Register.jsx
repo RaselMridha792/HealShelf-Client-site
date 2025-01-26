@@ -8,6 +8,7 @@ import useUploadImage from "../../hooks/useUploadImage";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { FaGoogle } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
   const { CreateUser, upDateUser, signInGoogle } = useContext(AuthContext);
@@ -107,6 +108,10 @@ const Register = () => {
   return (
     <>
       <div className="items-center justify-center flex lg:mt-40 mt-20">
+      <Helmet>
+        <title>Heal Shelf | Register</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
         <div className="flex lg:w-8/12 md:w-10/12 mx-auto flex-col-reverse justify-between items-center lg:flex-row-reverse">
           <div className="w-full flex items-center justify-center">
             <img className="md:w-2/3" src={logo} alt="" />

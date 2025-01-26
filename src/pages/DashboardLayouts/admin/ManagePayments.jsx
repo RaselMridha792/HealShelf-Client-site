@@ -3,6 +3,7 @@ import Loader from "../shared/Loader";
 import usePayments from "./usePayments";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const ManagePayments = () => {
   const [payments, isLoading, refetch] = usePayments();
@@ -31,6 +32,10 @@ const ManagePayments = () => {
 
   return (
     <>
+            <Helmet>
+        <title>Admin | Manage Payment</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
       <section className="my-20">
         <h1 className="text-3xl text-center font-bold ">
           Your Payment History

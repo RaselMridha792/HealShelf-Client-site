@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../shared/Loader";
 import Advertise from "./Advertise";
+import { Helmet } from "react-helmet";
 
 const AskForAdvertise = () => {
   const { user, loading } = useContext(AuthContext);
@@ -23,6 +24,10 @@ const AskForAdvertise = () => {
 
   return (
     <div>
+            <Helmet>
+        <title>seller | Ask For Ads</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
       <div className="flex flex-col items-center justify-between md:flex-row">
         <h1 className="text-3xl text-center uppercase font-bold py-5">
           Request Admin For The Ads

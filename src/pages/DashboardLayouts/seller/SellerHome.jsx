@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { AuthContext } from "../../../Context/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const SellerHome = () => {
   const axiosSecure = useAxiosSecure();
@@ -21,6 +22,10 @@ const SellerHome = () => {
   return (
     <>
       <section className="my-10">
+      <Helmet>
+        <title>Seller | Dashboard</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
         <h1 className="text-center text-3xl font-bold uppercase">Dashboard</h1>
         <hr className="my-5" />
         <div className="my-10 grid grid-cols-1 md:grid-cols-3 gap-5">

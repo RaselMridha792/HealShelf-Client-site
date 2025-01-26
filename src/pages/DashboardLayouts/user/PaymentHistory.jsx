@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import useHistory from "../../../hooks/useHistory";
 
 const PaymentHistory = () => {
@@ -5,6 +6,10 @@ const PaymentHistory = () => {
   return (
     <>
       <section className="my-20">
+      <Helmet>
+        <title>user | Dashboard</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
         <h1 className="text-3xl text-center font-bold ">
           Your Payment History
         </h1>

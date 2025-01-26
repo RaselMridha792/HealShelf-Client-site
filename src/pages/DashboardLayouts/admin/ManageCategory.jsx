@@ -6,6 +6,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import UpdateCategory from "./UpdateCategory";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const ManageCategory = () => {
   const [categories, isLoading, refetch] = useCategories();
@@ -73,6 +74,10 @@ const ManageCategory = () => {
   return (
     <>
       <section className="my-10 px-5">
+      <Helmet>
+        <title>Admin | Manage category</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
         <div className="flex flex-col md:flex-row items-center justify-between">
           <h1 className="text-3xl font-bold uppercase">Manage Category</h1>
           <button

@@ -3,6 +3,7 @@ import { DownloadTableExcel } from "react-export-table-to-excel";
 import { FaDownload, FaList } from "react-icons/fa";
 import usePayments from "./usePayments";
 import Loader from "../shared/Loader";
+import { Helmet } from "react-helmet";
 
 const SalesReport = () => {
   const [sort, setSort] = useState(false);
@@ -20,6 +21,10 @@ const SalesReport = () => {
   console.log(buyItem)
   return (
     <div>
+              <Helmet>
+        <title>Admin | Sales Report</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
       <div className="py-10 flex items-center justify-between">
         <h1 className="text-3xl font-bold capitalize">Sales Report</h1>
         <button onClick={()=>setSort(!sort)} className={`btn ${sort?'btn-success':'btn-neutral'}`}><FaList></FaList> {sort?'filtered by date':'filter By Date'} </button>

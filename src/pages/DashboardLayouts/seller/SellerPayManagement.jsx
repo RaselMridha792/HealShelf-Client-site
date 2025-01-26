@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Loader from "../shared/Loader";
 import useSellerPayment from "./useSellerPayment";
+import { Helmet } from "react-helmet";
 
 const SellerPayManagement = () => {
   const [sellerPayment, refetch, isLoading] = useSellerPayment();
@@ -12,6 +13,10 @@ const SellerPayManagement = () => {
   return (
     <>
       <div>
+      <Helmet>
+        <title>seller | Payment History</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
         <section className="my-20">
           <h1 className="py-5 text-3xl font-bold text-center">
             Manage Payments

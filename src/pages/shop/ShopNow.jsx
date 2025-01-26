@@ -3,6 +3,7 @@ import RowCard from "./RowCard";
 import Loader from "../DashboardLayouts/shared/Loader";
 import { FaList, FaSearch } from "react-icons/fa";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const ShopNow = () => {
   const [sort, setSort] = useState(false);
@@ -11,6 +12,10 @@ const ShopNow = () => {
   return (
     <>
       <section className="my-32 max-w-screen-2xl mx-auto px-5">
+      <Helmet>
+        <title>Heal shelf | shop now</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
         <h1 className="text-3xl text-center font-bold">Shop Now</h1>
         <hr className="my-5" />
         <div className="flex gap-5 justify-between mb-10">

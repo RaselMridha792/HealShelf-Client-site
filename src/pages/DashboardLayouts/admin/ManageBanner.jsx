@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useBanner from "./useBanner";
+import { Helmet } from "react-helmet";
 
 const ManageBanner = () => {
   const [data, isLoading, refetch] = useBanner();
@@ -25,6 +26,10 @@ const ManageBanner = () => {
   };
   return (
     <>
+            <Helmet>
+        <title>Admin | Manage Banner ads</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
       <h1 className="text-2xl font-bold text-center py-5 capitalize">
         manage banner advertise
       </h1>

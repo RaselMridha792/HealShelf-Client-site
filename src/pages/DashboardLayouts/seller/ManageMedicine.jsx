@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import AddMedicine from "./AddMedicine";
 import useSellerMedicine from "./useSellerMedicine";
 
@@ -10,6 +11,10 @@ const ManageMedicine = () => {
   return (
     <>
       <div className="flex items-center justify-between flex-col md:flex-row">
+      <Helmet>
+        <title>seller | Manage medicine</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
         <h1 className="text-3xl text-center font-bold py-5">Manage Medicine</h1>
         {/* You can open the modal using document.getElementById('ID').showModal() method */}
         <button

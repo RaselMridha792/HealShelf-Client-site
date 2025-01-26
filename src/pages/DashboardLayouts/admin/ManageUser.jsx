@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaRegTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const ManageUser = () => {
   const axiosSecure = useAxiosSecure();
@@ -69,6 +70,10 @@ const ManageUser = () => {
   };
   return (
     <>
+          <Helmet>
+        <title>Admin | Manage User</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
       <h1 className="text-3xl capitalize text-center pt-10 pb-5">
         manage users
       </h1>

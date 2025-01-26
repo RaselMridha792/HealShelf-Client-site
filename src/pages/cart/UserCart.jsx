@@ -6,6 +6,7 @@ import { AuthContext } from "../../Context/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const UserCart = () => {
   const [cart, refetch, isLoading] = useCart();
@@ -45,6 +46,10 @@ const UserCart = () => {
   return (
     <>
       <section className="my-20 max-w-screen-2xl mx-auto px-5">
+      <Helmet>
+        <title>Heal shelf | My Cart</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
           <h1 className="font-bold md:text-2xl text-lg py-5">My Cart Items ({cart?.length})</h1>
         <div className="flex flex-col md:flex-row gap-5 items-center justify-between pt-10">
           <h1 className="font-bold md:text-2xl text-lg py-5">Total Price : {totalPrice} </h1>

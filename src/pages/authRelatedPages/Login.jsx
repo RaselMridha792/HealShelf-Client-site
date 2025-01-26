@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 const Login = () => {
   const { LoginUser, signInGoogle } = useContext(AuthContext);
   const { register, handleSubmit, reset } = useForm();
@@ -68,6 +69,10 @@ const Login = () => {
   return (
     <>
       <div className="hero bg-base-200 min-h-screen">
+      <Helmet>
+        <title>Heal Shelf | Login</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
         <div className="hero-content flex-col-reverse items-center justify-evenly gap-10 lg:flex-row-reverse">
           <div>
             <img className="w-2/3" src={Logo} alt="" />

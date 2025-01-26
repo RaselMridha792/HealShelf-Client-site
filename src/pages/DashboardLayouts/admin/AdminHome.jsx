@@ -3,6 +3,7 @@ import { MdOutlinePaid, MdOutlinePendingActions } from "react-icons/md";
 import { GrMoney } from "react-icons/gr";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 const AdminHome = () => {
   //   const { user } = useContext(AuthContext);
@@ -16,13 +17,17 @@ const AdminHome = () => {
     },
   });
 
-  const orders = stats?.orders
-  const status = orders?.map(items => items.status)
-  const pending = status?.filter(pendingItem => pendingItem == 'processing')
-  const paid = status?.filter(pendingItem => pendingItem == 'paid')
+  const orders = stats?.orders;
+  const status = orders?.map((items) => items.status);
+  const pending = status?.filter((pendingItem) => pendingItem == "processing");
+  const paid = status?.filter((pendingItem) => pendingItem == "paid");
 
   return (
     <>
+      <Helmet>
+        <title>Heal shelf | Admin</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
       <h1 className="text-3xl font-bold pt-5">Hi, Welcome to dashboard</h1>
       <div className="my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         <div className="bg-orange-400 text-white py-10 flex items-center justify-center">
