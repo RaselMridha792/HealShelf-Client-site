@@ -4,7 +4,6 @@ import { AuthContext } from "../../../Context/AuthProvider";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCart from "../../../hooks/useCart";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 
 const CheckOutForm = () => {
   const stripe = useStripe();
@@ -12,12 +11,14 @@ const CheckOutForm = () => {
   const [error, setError] = useState("");
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
-  const navigate = useNavigate();
   const [cart] = useCart();
   const [clientSecret, setClientSecret] = useState("");
-  const [TransactionId, setTransactionId] = useState('');
-  const totalPrices = cart?.reduce((total, item) => total +( item.mainPrice*item.quantity), 0);
-  const totalPrice = Math.round(totalPrices * 100)/ 100;
+  const [TransactionId, setTransactionId] = useState("");
+  const totalPrices = cart?.reduce(
+    (total, item) => total + item.mainPrice * item.quantity,
+    0
+  );
+  const totalPrice = Math.round(totalPrices * 100) / 100;
 
   useEffect(() => {
     axiosSecure
@@ -25,7 +26,7 @@ const CheckOutForm = () => {
       .then((res) => {
         setClientSecret(res.data.clientSecret);
       });
-    }, [axiosSecure, totalPrice]);
+  }, [axiosSecure, totalPrice]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -49,44 +50,46 @@ const CheckOutForm = () => {
     }
 
     // confirm payment
-    const {paymentIntent, error: confirmError} = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: card,
-        billing_details: {
-          email: user?.email || 'anonymous',
-          name: user?.displayName || 'anonymous'
-        }
-      }
-    })
-    if(confirmError){
-      console.log('confirm error')
-    }else{
-      console.log('payment intent', paymentIntent)
-      if(paymentIntent.status === 'succeeded'){
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            email: user?.email || "anonymous",
+            name: user?.displayName || "anonymous",
+          },
+        },
+      });
+    if (confirmError) {
+      console.log("confirm error");
+    } else {
+      console.log("payment intent", paymentIntent);
+      if (paymentIntent.status === "succeeded") {
         Swal.fire({
           title: `Payment Success!`,
           icon: "success",
-          draggable: true
+          draggable: true,
         });
-        setTransactionId(paymentIntent.id)
+        setTransactionId(paymentIntent.id);
+        const sellermail = cart.map((item) => item.sellerEmail);
 
         // save the payment to the database
         const payment = {
           email: user.email,
           price: totalPrice,
           date: new Date(),
-          cartId: cart.map(item => item._id),
-          MedicineItemId: cart.map(item => item.id),
-          itemName: cart.map(item => item.name),
-          itemPrice: cart.map(item => item.mainPrice),
-          itemQuantity: cart.map(item => item.quantity),
-          sellerEmail: cart.map(item =>item.sellerEmail),
+          cartId: cart.map((item) => item._id),
+          MedicineItemId: cart.map((item) => item.id),
+          itemName: cart.map((item) => item.name),
+          itemPrice: cart.map((item) => item.mainPrice),
+          itemQuantity: cart.map((item) => item.quantity),
+          sellerEmail: sellermail[0],
           transactionId: paymentIntent.id,
-          status: 'processing',
-        }
-        const res = await axiosSecure.post('/payments', payment);
-        console.log('payment saved', res);
-        if(res){
+          status: "processing",
+        };
+        const res = await axiosSecure.post("/payments", payment);
+        console.log("payment saved", res);
+        if (res) {
           // navigate('/invoice')
         }
       }
@@ -95,7 +98,9 @@ const CheckOutForm = () => {
 
   return (
     <>
-    <h1 className="text-center text-3xl font-bold">Total Bill: ${totalPrice}</h1>
+      <h1 className="text-center text-3xl font-bold">
+        Total Bill: ${totalPrice}
+      </h1>
       <form onSubmit={handleSubmit}>
         {clientSecret && (
           <CardElement
