@@ -1,16 +1,18 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../assets/authRelated/doctorLogin.png";
 import PrimaryBtn from "../../Components/shared/PrimaryBtn";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import { useForm } from "react-hook-form";
-import { FaGoogle } from "react-icons/fa";
+import { FaEye, FaGoogle } from "react-icons/fa";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import { IoEyeOff } from "react-icons/io5";
 const Login = () => {
   const { LoginUser, signInGoogle } = useContext(AuthContext);
   const { register, handleSubmit, reset } = useForm();
+  const [eye, setEye] = useState(false)
   const axiosPublic = useAxiosPublic();
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate(from, { replace: true })
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error);
@@ -55,10 +57,10 @@ const Login = () => {
               showConfirmButton: false,
               timer: 1500,
             });
-          }else{
-            console.log(res)
+          } else {
+            console.log(res);
           }
-          navigate('/');
+          navigate("/");
         });
       })
       .catch((error) => {
@@ -69,10 +71,10 @@ const Login = () => {
   return (
     <>
       <div className="hero bg-base-200 min-h-screen">
-      <Helmet>
-        <title>Heal Shelf | Login</title>
-        <meta name="Heal shelf" content="Helmet application" />
-      </Helmet>
+        <Helmet>
+          <title>Heal Shelf | Login</title>
+          <meta name="Heal shelf" content="Helmet application" />
+        </Helmet>
         <div className="hero-content flex-col-reverse items-center justify-evenly gap-10 lg:flex-row-reverse">
           <div>
             <img className="w-2/3" src={Logo} alt="" />
@@ -92,17 +94,23 @@ const Login = () => {
                   required
                 />
               </div>
-              <div className="form-control">
+              <div className="form-control relative">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="password"
+                  type={`${eye?'text':'password'}`}
                   placeholder="password"
                   {...register("password")}
                   className="input input-bordered"
                   required
                 />
+                <div
+                  onClick={() => setEye(!eye)}
+                  className="absolute bottom-12 right-6"
+                >
+                  {eye ? <IoEyeOff /> : <FaEye></FaEye>}
+                </div>
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
                     Forgot password?
@@ -115,7 +123,8 @@ const Login = () => {
                   onClick={handleGoogleLogin}
                   className="btn btn-outline mt-5 text-cyan-400 hover:bg-cyan-400"
                 >
-                  <FaGoogle />Login With Google
+                  <FaGoogle />
+                  Login With Google
                 </Link>
               </div>
               <p className="text-center py-1">

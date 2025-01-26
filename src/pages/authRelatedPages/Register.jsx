@@ -7,16 +7,19 @@ import { AuthContext } from "../../Context/AuthProvider";
 import useUploadImage from "../../hooks/useUploadImage";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
-import { FaGoogle } from "react-icons/fa";
+import { FaEye, FaGoogle } from "react-icons/fa";
 import { Helmet } from "react-helmet";
+import { IoEyeOff } from "react-icons/io5";
 
 const Register = () => {
   const { CreateUser, upDateUser, signInGoogle } = useContext(AuthContext);
   const saveImgBB = useUploadImage();
+  const [eye, setEye] = useState(false);
   const axiosPublic = useAxiosPublic();
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const passwordRegex =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&*()]).{6,}$/;
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&*()]).{6,}$/;
 
   const { register, handleSubmit, reset } = useForm();
 
@@ -24,7 +27,7 @@ const Register = () => {
     // sent imagedata img bb
     const image = data.file[0];
     const image_url = await saveImgBB(image);
-    const password = data.password
+    const password = data.password;
     if (password.length < 6) {
       setErrorMessage("password mast be 6 caracter or longer");
       return;
@@ -87,7 +90,7 @@ const Register = () => {
         axiosPublic.post("/users", userInfo).then((res) => {
           const response = res.data.acknowledged;
           if (response) {
-            console.log(response)
+            console.log(response);
             Swal.fire({
               position: "center",
               icon: "success",
@@ -95,8 +98,8 @@ const Register = () => {
               showConfirmButton: false,
               timer: 1500,
             });
-          }else{
-            console.log(res)
+          } else {
+            console.log(res);
           }
           navigate("/");
         });
@@ -108,10 +111,10 @@ const Register = () => {
   return (
     <>
       <div className="items-center justify-center flex lg:mt-40 mt-20">
-      <Helmet>
-        <title>Heal Shelf | Register</title>
-        <meta name="Heal shelf" content="Helmet application" />
-      </Helmet>
+        <Helmet>
+          <title>Heal Shelf | Register</title>
+          <meta name="Heal shelf" content="Helmet application" />
+        </Helmet>
         <div className="flex lg:w-8/12 md:w-10/12 mx-auto flex-col-reverse justify-between items-center lg:flex-row-reverse">
           <div className="w-full flex items-center justify-center">
             <img className="md:w-2/3" src={logo} alt="" />
@@ -169,17 +172,23 @@ const Register = () => {
                   <option>Seller</option>
                 </select>
               </div>
-              <div className="form-control">
+              <div className="form-control relative">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="password"
+                  type={`${eye?'text':'password'}`}
                   {...register("password")}
                   placeholder="password"
                   className="input input-bordered"
                   required
                 />
+                <div
+                  onClick={() => setEye(!eye)}
+                  className="absolute bottom-4 right-6"
+                >
+                  {eye ? <IoEyeOff /> : <FaEye></FaEye>}
+                </div>
               </div>
               <div className="form-control mt-6">
                 <PrimaryBtn type="submit" title={"Register"}></PrimaryBtn>

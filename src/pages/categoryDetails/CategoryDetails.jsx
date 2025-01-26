@@ -1,15 +1,12 @@
 import { useParams } from "react-router-dom";
-import useProducts from "../DashboardLayouts/shared/loadDataHook/useProducts";
 import Loader from "../DashboardLayouts/shared/Loader";
 import RowCard from "../shop/RowCard";
+import useProduct from "../DashboardLayouts/shared/loadDataHook/useProduct";
 
 const CategoryDetails = () => {
     const params = useParams()
-    console.log(params.category)
-    const [products, isLoading] = useProducts();
-    console.log(products);
+    const [products, isLoading] = useProduct();
     const specificProduct = products?.filter(product => product.category == params.category)
-    console.log(specificProduct)
   return (
     <>
       <section className="my-40 max-w-screen-2xl mx-auto px-5">

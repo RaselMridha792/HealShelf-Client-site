@@ -1,7 +1,7 @@
 const Invoice = () => {
     return (
         <>
-        <h1>Invoice</h1>            
+        <h1>Invoice page</h1>            
         </>
     );
 };
