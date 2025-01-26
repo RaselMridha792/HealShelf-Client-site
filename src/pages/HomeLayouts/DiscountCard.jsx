@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const DiscountCard = ({ product }) => {
   const { name, image, _id } = product;
 
@@ -13,12 +15,12 @@ const DiscountCard = ({ product }) => {
         <div className="card-body flex flex-col min-h-[200px]">
           <h2 className="card-title">{name}</h2>
           <div className="card-actions mt-auto justify-end">
-            <button
+            <Link to="/shop-now"
               onClick={() => handleViewDetails(_id)}
               className="btn btn-outline btn-sm"
             >
               View More
-            </button>
+            </Link>
           </div>
         </div>
       </div>

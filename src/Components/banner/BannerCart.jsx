@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const BannerCart = ({heading, subHeading, image}) => {
   return (
     <>
@@ -6,7 +8,7 @@ const BannerCart = ({heading, subHeading, image}) => {
           <div className="lg:flex-grow w-1/2">
             <h1 className="md:text-4xl text-2xl font-bold pb-5">{heading}</h1>
             <p className="text-lg pb-3">{subHeading}</p>
-            <button className="btn btn-neutral">Learn More</button>
+            <Link to="/shop-now" className="btn btn-neutral">Learn More</Link>
           </div>
           <div className="lg:flex-1 w-1/2">
             <img className="md:h-96 h-52 object-cover rounded-xl shadow-lg" src={image} alt="" />

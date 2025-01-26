@@ -5,6 +5,7 @@ import { FaCartShopping } from "react-icons/fa6";
 import useRole from "../../hooks/useRole";
 import useCart from "../../hooks/useCart";
 import Swal from "sweetalert2";
+import logo from "../../assets/authRelated/healshelf.png";
 
 const Navbar = () => {
   const { user, logOutUser } = useContext(AuthContext);
@@ -19,7 +20,7 @@ const Navbar = () => {
           icon: "success",
           title: "Logout successful",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
       })
       .catch((error) => {
@@ -38,7 +39,14 @@ const Navbar = () => {
   );
   return (
     <>
-      <section className="bg-cyan-400 fixed w-full z-50 top-0">
+      <section className="bg-cyan-300 shadow-lg fixed w-full z-50 top-0">
+        <div className="max-w-screen-2xl mx-auto px-5 py-2 flex justify-between items-center">
+          <h1>welcome to our medical store</h1>
+          <select name="" id="" className="bg-cyan-400">
+            <option value="">English</option>
+            <option value="">Bangla</option>
+          </select>
+        </div>
         <div className="navbar max-w-screen-2xl mx-auto px-5">
           <div className="navbar-start">
             <div className="dropdown">
@@ -70,7 +78,7 @@ const Navbar = () => {
               </ul>
             </div>
             <Link to="/" className="uppercase text-2xl text-white font-bold">
-              HealShelf
+              <img className="w-52" src={logo} alt="" />
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
@@ -82,10 +90,12 @@ const Navbar = () => {
                 className="dropdown dropdown-bottom dropdown-left"
                 tabIndex={0}
               >
-                <Link to="/cart"><FaCartShopping className="text-3xl" /></Link>
+                <Link to="/cart">
+                  <FaCartShopping className="text-3xl" />
+                </Link>
               </div>
               <div className="absolute -top-3 -right-5 badge badge-secondary">
-                <p>{cart?.length}</p>
+                <p>{cart ? cart?.length : 0}</p>
               </div>
             </div>
             {user ? (
@@ -127,7 +137,7 @@ const Navbar = () => {
                 to="/login"
                 className="btn bg-gray-700 border-none text-white"
               >
-                Join Now
+                Join Us
               </Link>
             )}
           </div>

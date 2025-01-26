@@ -87,7 +87,7 @@ const AddMedicine = ({closeModal}) => {
                 <input
                   type="text"
                   name="description"
-                  placeholder="Medicine Name"
+                  placeholder="Medicine Description"
                   className="input input-bordered w-full"
                   required
                 />

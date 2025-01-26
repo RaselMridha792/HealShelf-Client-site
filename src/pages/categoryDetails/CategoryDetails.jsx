@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import Loader from "../DashboardLayouts/shared/Loader";
 import RowCard from "../shop/RowCard";
 import useProduct from "../DashboardLayouts/shared/loadDataHook/useProduct";
+import { Helmet } from "react-helmet";
 
 const CategoryDetails = () => {
     const params = useParams()
@@ -10,7 +11,11 @@ const CategoryDetails = () => {
   return (
     <>
       <section className="my-40 max-w-screen-2xl mx-auto px-5">
-        <h1 className="text-4xl">Category wise data</h1>
+      <Helmet>
+        <title>Heal shelf | category</title>
+        <meta name="Heal shelf" content="Helmet application" />
+      </Helmet>
+        <h1 className="text-3xl text-center font-bold uppercase">Category Details</h1>
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}

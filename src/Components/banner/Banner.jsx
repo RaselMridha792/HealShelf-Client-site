@@ -38,7 +38,7 @@ const Banner = () => {
             ) : (
               data?.map((singleData) => (
                 <SwiperSlide key={singleData.map}>
-                  <BannerCart heading={singleData.heading} subHeading={singleData.subHeading} image={singleData.image}></BannerCart>
+                  <BannerCart heading={singleData.heading} subHeading={singleData.subheading} image={singleData.image}></BannerCart>
                 </SwiperSlide>
               ))
             )}
