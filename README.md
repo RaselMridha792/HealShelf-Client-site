@@ -69,5 +69,5 @@ Follow the steps below to get the project up and running locally:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/medicine-ecommerce.git
-cd medicine-ecommerce
+git clone https://github.com/RaselMridha792/HealShelf-Client-site
+cd HealShelf-Client-site
