@@ -17,20 +17,12 @@ const Banner = () => {
       <section className="mt-12">
         <header>
           <Swiper
-            // install Swiper modules
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             spaceBetween={0}
             autoplay={true}
             slidesPerView={1}
             navigation
-            //   pagination={{ clickable: true }}
-            //   scrollbar={{ draggable: true }}
           >
-            {/* {products.map((product) => (
-                    <SwiperSlide key={product._id}>
-                      <DiscountCard product={product}></DiscountCard>
-                    </SwiperSlide>
-                  ))} */}
             {isLoading ? (
               <>
                 <Loader></Loader>
