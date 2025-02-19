@@ -3,6 +3,10 @@
 ## About the Project
 A multi-vendor platform for buying and selling medicines and healthcare products. The website includes vendor management, user authentication, product listings, cart, and payment features.
 
+## user Credentials
+- Admin Email: Raselmridha792@gmail.com
+- Admin Password: 12345678
+
 ## Live Site
 You can view the live site here:  
 **[Live Site URL](https://heal-shelf-client.web.app)**
