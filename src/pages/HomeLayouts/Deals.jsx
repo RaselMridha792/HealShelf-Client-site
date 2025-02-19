@@ -26,7 +26,7 @@ const Deals = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 ">
-          <div className="card bg-base-100 shadow-sm hover:shadow-lg border rounded-sm duration-300">
+          <Link to="/category/Personal%20Care" className="card bg-base-100 shadow-sm hover:shadow-lg border rounded-sm duration-300">
             <figure>
               <img
                 src="https://img.icons8.com/?size=100&id=YKmWcwT48liT&format=png&color=000000"
@@ -40,8 +40,8 @@ const Deals = () => {
               </h2>
               <p>Blood Pressure and Sprague Stethoscope Kit</p>
             </div>
-          </div>
-          <div className="card bg-base-100 shadow-sm hover:shadow-lg border rounded-sm duration-300">
+          </Link>
+          <Link to="/category/tablet"  className="card bg-base-100 shadow-sm hover:shadow-lg border rounded-sm duration-300">
             <figure>
               <img
                 src="https://img.icons8.com/?size=100&id=124316&format=png&color=000000"
@@ -55,8 +55,8 @@ const Deals = () => {
               </h2>
               <p>Supports heart function, regulates blood flow.</p>
             </div>
-          </div>
-          <div className="card bg-base-100 shadow-sm hover:shadow-lg border rounded-sm duration-300">
+          </Link>
+          <Link to="/category/Vitamins" className="card bg-base-100 shadow-sm hover:shadow-lg border rounded-sm duration-300">
             <figure>
               <img
                 src="https://img.icons8.com/?size=100&id=zdyJAwQtaLsX&format=png&color=000000"
@@ -70,8 +70,8 @@ const Deals = () => {
               </h2>
               <p>Enhances mood & stability, reduces anxiety.</p>
             </div>
-          </div>
-          <div className="card bg-base-100 shadow-sm hover:shadow-lg border rounded-sm duration-300">
+          </Link>
+          <Link to="/category/Herbal" className="card bg-base-100 shadow-sm hover:shadow-lg border rounded-sm duration-300">
             <figure>
               <img
                 src="https://img.icons8.com/?size=100&id=KNklzhnWchAi&format=png&color=000000"
@@ -85,7 +85,7 @@ const Deals = () => {
               </h2>
               <p>Boosts body strength, improves immunity.</p>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
       <div className="bg-cyan-500 bg-opacity-20 rounded-lg md:col-span-1 w-full p-5">

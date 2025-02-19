@@ -3,7 +3,7 @@ const Benifit = () => {
             <>
             <div className='mb-10'>
                   <h1 className='text-2xl font-bold capitalize'>Benefit we provide you</h1>
-                  <div className='mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
+                  <div className='mt-5 border p-5 border-cyan-500 rounded-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
                         <div className='flex items-center gap-2 md:border-r-4 md:border-cyan-500'>
                               <img className='w-20' src="https://img.icons8.com/?size=100&id=EYvpmT5B8qg0&format=png&color=000000" alt="" />
                               <div>

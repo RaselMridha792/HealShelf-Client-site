@@ -6,7 +6,7 @@ const Categories = () => {
   const [categories, isLoading] = useCategories();
   return (
     <>
-      <section className="mb-20 mt-10">
+      <section className="mt-10">
         <h1 className="text-2xl py-5 font-bold">Our Popular Categories </h1>
         <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-5">
           {isLoading ? (
