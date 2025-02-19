@@ -23,14 +23,21 @@ import AskForAdvertise from "../pages/DashboardLayouts/seller/AskForAdvertise";
 import ManageBanner from "../pages/DashboardLayouts/admin/ManageBanner";
 import ManageCategory from "../pages/DashboardLayouts/admin/ManageCategory";
 import UserProfile from "../pages/userProfile/UserProfile";
+import ErrorPage from "../pages/ErrorPage";
+import AboutUs from "../pages/aboutUs/AboutUs";
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainPage></MainPage>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
         element: <HomaPage></HomaPage>,
+      },
+      {
+        path: '/about-us',
+        element: <AboutUs></AboutUs>
       },
       {
         path: '/profile',
