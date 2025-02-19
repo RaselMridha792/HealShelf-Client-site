@@ -33,8 +33,13 @@ const Discount = () => {
   return (
     <>
       <section className="my-20">
-        <div className="w-full py-10 bg-cyan-400">
-          <div className="flex items-center flex-col md:flex-row justify-center">
+        <div
+          style={{
+            backgroundImage: `url('https://i.ibb.co.com/QFn1NcsX/bg.jpg')`,
+          }}
+          className="w-full py-10 text-white object-cover bg-center "
+        >
+          <div className="flex items-center justify-between flex-col md:flex-row px-5">
             <div>
               <h1 className="md:text-4xl text-2xl font-bold uppercase">
                 get upto 50% discount
@@ -42,14 +47,16 @@ const Discount = () => {
               <p className="text-xl font-bold">for our OTC medicines</p>
             </div>
             <img
-              className="md:w-1/2 md:h-64 object-cover"
-              src="https://i.ibb.co.com/1JGtSqK/pngegg-1.png"
+              className="md:w-1/3  object-cover"
+              src="https://i.ibb.co.com/Z2jwn34/pngegg-3.png"
               alt=""
             />
           </div>
         </div>
         <div className="my-10">
-          <h1 className="text-2xl font-bold pt-10 capitalize">discount products</h1>
+          <h1 className="text-2xl font-bold pt-10 capitalize">
+            discount products
+          </h1>
           <div className="my-5">
             {loading ? (
               <Loader></Loader>
@@ -72,8 +79,8 @@ const Discount = () => {
                     },
                   }}
                   navigation
-                //   pagination={{ clickable: true }}
-                //   scrollbar={{ draggable: true }}
+                  //   pagination={{ clickable: true }}
+                  //   scrollbar={{ draggable: true }}
                 >
                   {products.map((product) => (
                     <SwiperSlide key={product._id}>

@@ -5,13 +5,13 @@ const BannerCart = ({ heading, subHeading, image }) => {
     <>
       <div className="relative w-full">
         <video
-          className="w-full md:h-[700px] h-[500px] object-cover"
+          className="w-full md:h-[800px] h-[500px] object-cover"
           autoPlay
           loop
           muted
-          src="https://res.cloudinary.com/dueb6id6i/video/upload/v1739912400/e0ncuxczeyb1ra0xwsor.mp4"
+          src="https://cdn.pixabay.com/video/2019/09/19/27019-361107952_large.mp4"
         ></video>
-        <div className="absolute top-0 left-0 w-full bg-black h-full py-40 bg-opacity-10">
+        <div className="absolute top-0 left-0 w-full bg-black h-full py-40 bg-opacity-30">
           <div className="flex items-center justify-between md:gap-10 gap-5 max-w-screen-2xl mx-auto px-5">
             <div className="lg:flex-grow text-white w-1/2">
               <h1 className="md:text-4xl text-2xl font-bold pb-5">{heading}</h1>

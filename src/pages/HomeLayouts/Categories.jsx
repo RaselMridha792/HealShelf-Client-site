@@ -6,15 +6,15 @@ const Categories = () => {
   const [categories, isLoading] = useCategories();
   return (
     <>
-      <section className="my-20">
-        <h1 className="text-2xl py-5 font-bold">Our Popular Categories:</h1>
-        <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-5">
+      <section className="mb-20 mt-10">
+        <h1 className="text-2xl py-5 font-bold">Our Popular Categories </h1>
+        <div className="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-5">
           {isLoading ? (
             <Loader></Loader>
           ) : (
             categories.map((category) => (
               <Link to={`/category/${category.categoryName}`}
-                className="card border hover:border-cyan-500 duration-300 rounded-none"
+                className="card border hover:border-cyan-500 hover:shadow-lg duration-300 rounded-none"
                 key={category._id}
               >
                 <figure className="flex p-2 items-center justify-center">

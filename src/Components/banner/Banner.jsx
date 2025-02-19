@@ -14,7 +14,7 @@ const Banner = () => {
   const [data, isLoading] = useBannerData();
   return (
     <>
-      <section className="mt-12">
+      <section className="mt-18">
         <header>
           <Swiper
             modules={[Navigation, Pagination, Scrollbar, A11y]}

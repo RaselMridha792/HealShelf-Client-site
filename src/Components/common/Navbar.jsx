@@ -39,14 +39,7 @@ const Navbar = () => {
   );
   return (
     <>
-      <section className="bg-cyan-300 shadow-lg fixed w-full z-50 top-0">
-        <div className="max-w-screen-2xl mx-auto px-5 py-2 flex justify-between items-center">
-          <h1>welcome to our medical store</h1>
-          <select name="" id="" className="bg-cyan-400">
-            <option value="">English</option>
-            <option value="">Bangla</option>
-          </select>
-        </div>
+      <section className="bg-cyan-400 bg-opacity-80 shadow-lg fixed w-full z-50 top-0 py-2">
         <div className="navbar max-w-screen-2xl mx-auto px-5">
           <div className="navbar-start">
             <div className="dropdown">
