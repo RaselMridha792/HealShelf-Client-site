@@ -6,6 +6,8 @@ A multi-vendor platform for buying and selling medicines and healthcare products
 ## user Credentials
 - Admin Email: Raselmridha792@gmail.com
 - Admin Password: 12345678
+- Seller Email: Raselmridha082@gmail.com
+- Seller Password: Rasel635665@#
 
 ## Live Site
 You can view the live site here:  
