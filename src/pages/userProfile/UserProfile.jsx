@@ -1,62 +1,71 @@
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+
 const UserProfile = () => {
+  const { user, upDateUser } = useContext(AuthContext);
+  const navigate = useNavigate()
+
+  const handleUpdateProfile = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const photo = form.photo.value;
+    upDateUser(name, photo)
+      .then(() => {
+        Swal.fire({
+          title: "profile updated successfully",
+          icon: "success",
+          draggable: true,
+        });
+        navigate('/')
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <>
-      <section className="max-w-screen-2xl border rounded-xl mx-auto px-5 mt-40">
-        <div className="flex items-center justify-between p-5">
-          <div className=" flex items-center gap-5">
-            <div className="avatar">
-              <div className="w-24 rounded-full">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-              </div>
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold">Rasel Mridh</h1>
-              <p>Raselmridha792@gmail.com</p>
-            </div>
-          </div>
+      <section className="my-32 max-w-screen-2xl mx-auto px-5 flex items-center justify-center">
+        <div className="border p-10 rounded-xl shadow-xl flex flex-col gap-3 items-center">
+          <img
+            className="rounded-full border-4 border-cyan-600 w-40 h-40 object-cover"
+            src={user?.photoURL}
+            alt=""
+          />
           <div>
-            <button className="btn btn-primary">Edit</button>
+            <h1 className="text-xl font-bold">Name: {user?.displayName}</h1>
+            <h1 className="text-xl font-bold">Email: {user?.email}</h1>
           </div>
-        </div>
-        {/* <div>
-          <div className="flex gap-5 w-full flex-col md:flex-row">
-            <div className="form-control w-full">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
+          <hr />
+          <div>
+            <form onSubmit={handleUpdateProfile}>
+              <div className="flex gap-5 md:flex-row flex-col">
+                <label className="w-full">
+                  <h1>Name</h1>
+                  <input
+                    type="text"
+                    name="name"
+                    className="input input-bordered w-full "
+                    placeholder="enter your name"
+                  />
+                </label>
+                <label className="w-full">
+                  <h1>Photo Url</h1>
+                  <input
+                    type="url"
+                    name="photo"
+                    className="input input-bordered w-full"
+                  />
+                </label>
+              </div>
               <input
-                type="email"
-                placeholder="email"
-                className="input bg-gray-100"
-                required
+                type="submit"
+                value="Update profile"
+                className="btn mt-5 w-full btn-neutral"
               />
-            </div>
-            <div className="form-control w-full">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                placeholder="email"
-                className="input input-bordered"
-                required
-              />
-            </div>
-          </div>
-        </div> */}
-        <div className="divider"></div>
-        <div>
-          <h1 className="text-2xl font-bold">Personal Information</h1>
-          <div className="flex gap-10">
-            <div className="pt-5">
-              <h1 className="font-bold">First name</h1>
-              <p className="text-gray-500">Rasel</p>
-            </div>
-            <div className="pt-5">
-              <h1 className="font-bold">Last name</h1>
-              <p className="text-gray-500">Mridha</p>
-            </div>
-
+            </form>
           </div>
         </div>
       </section>

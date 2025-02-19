@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const provider = new GoogleAuthProvider();
   const axiosPublic = useAxiosPublic();
+  const [changeColor, setChangeColor] = useState(true)
 
   const CreateUser = (email, password) => {
     setLoading(true)
@@ -85,6 +86,8 @@ const AuthProvider = ({ children }) => {
     logOutUser,
     signInGoogle,
     loading,
+    changeColor,
+    setChangeColor
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

@@ -1,11 +1,15 @@
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthProvider";
+
 const AboutUs = () => {
+      const {changeColor } = useContext(AuthContext);
   return (
     <>
       <div
         style={{
           backgroundImage: `url('https://i.ibb.co.com/DPGX3wmN/11013.jpg')`,
         }}
-        className="max-w-screen-2xl mx-auto"
+        className="max-w-screen-2xl mx-auto text-black"
       >
         <div className="text-center py-20 px-5 mb-10 mt-32">
           <h1 className="lg:text-4xl text-2xl font-bold">
@@ -16,7 +20,7 @@ const AboutUs = () => {
           </p>
         </div>
       </div>
-      <div className="max-w-screen-2xl mx-auto px-5 space-y-3">
+      <div className={`max-w-screen-2xl mx-auto px-5 space-y-3 ${changeColor?'text-black':'text-white'}`}>
         <h1 className="text-2xl font-bold">About Us</h1>
         <p className="text-lg">
           Welcome to HealShelf, your one-stop online marketplace for all your

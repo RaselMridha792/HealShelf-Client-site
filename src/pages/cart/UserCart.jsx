@@ -10,7 +10,7 @@ import { Helmet } from "react-helmet";
 
 const UserCart = () => {
   const [cart, refetch, isLoading] = useCart();
-  const { user } = useContext(AuthContext);
+  const { user , changeColor} = useContext(AuthContext);
   const email = user?.email;
   const axiosSecure = useAxiosSecure();
   const totalPrices = cart?.reduce((total, item) => total +( item.mainPrice*item.quantity), 0);
@@ -45,7 +45,7 @@ const UserCart = () => {
   };
   return (
     <>
-      <section className="my-20 max-w-screen-2xl mx-auto px-5">
+      <section className={`my-20 max-w-screen-2xl mx-auto px-5 ${changeColor?'text-black':'text-white'}`}>
       <Helmet>
         <title>Heal shelf | My Cart</title>
         <meta name="Heal shelf" content="Helmet application" />
@@ -57,13 +57,13 @@ const UserCart = () => {
             {!cart?.length ? (
               <button disabled className="btn">CheckOut</button>
             ) : (
-              <Link to="/dashboard/checkout" className="btn btn-neutral">
+              <Link to="/dashboard/checkout" className="btn btn-neutral text-white">
                 CheckOut
               </Link>
             )}
           </div>
           <div>
-            <button onClick={handleDeleteAll} className="btn btn-neutral">
+            <button onClick={handleDeleteAll} className="btn btn-neutral text-white">
               clear cart
             </button>
           </div>

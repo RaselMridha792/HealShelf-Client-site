@@ -8,7 +8,9 @@ import Swal from "sweetalert2";
 import logo from "../../assets/authRelated/healshelf.png";
 
 const Navbar = () => {
-  const { user, logOutUser } = useContext(AuthContext);
+  const { user, logOutUser, changeColor, setChangeColor } =
+    useContext(AuthContext);
+
   const [role] = useRole();
   const [cart] = useCart();
   const userRole = role;
@@ -42,7 +44,7 @@ const Navbar = () => {
   );
   return (
     <>
-      <section className="bg-cyan-400 bg-opacity-80 shadow-lg fixed w-full z-50 top-0 py-2">
+      <section className="bg-cyan-400 bg-opacity-80 text-black shadow-lg fixed w-full z-50 top-0 py-2">
         <div className="navbar max-w-screen-2xl mx-auto px-5">
           <div className="navbar-start">
             <div className="dropdown">
@@ -81,6 +83,12 @@ const Navbar = () => {
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
           <div className="navbar-end gap-10">
+            <input
+              type="checkbox"
+              value="dark"
+              onChange={()=>setChangeColor(!changeColor)}
+              className="toggle theme-controller"
+            />
             <div className="relative">
               <div
                 className="dropdown dropdown-bottom dropdown-left"

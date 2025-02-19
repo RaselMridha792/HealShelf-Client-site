@@ -66,7 +66,7 @@ const RowCard = ({ product }) => {
         <div className="mt-3 ml-4">
           <button
             onClick={() => handleAddToCart(_id)}
-            className="btn bg-orange-400"
+            className="btn text-white bg-orange-400"
           >
             Select
           </button>

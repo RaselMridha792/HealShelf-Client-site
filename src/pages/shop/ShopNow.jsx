@@ -2,16 +2,18 @@ import useProducts from "../DashboardLayouts/shared/loadDataHook/useProducts";
 import RowCard from "./RowCard";
 import Loader from "../DashboardLayouts/shared/Loader";
 import { FaList, FaSearch } from "react-icons/fa";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
+import { AuthContext } from "../../Context/AuthProvider";
 
 const ShopNow = () => {
+      const {changeColor } = useContext(AuthContext);
   const [sort, setSort] = useState(false);
   const [search, setSearch] = useState('');
   const [products, isLoading] = useProducts(sort, search);
   return (
     <>
-      <section className="my-32 max-w-screen-2xl mx-auto px-5">
+      <section className={`my-32 max-w-screen-2xl mx-auto px-5 ${changeColor?'text-black':'text-white'}`}>
       <Helmet>
         <title>Heal shelf | shop now</title>
         <meta name="Heal shelf" content="Helmet application" />
@@ -28,7 +30,7 @@ const ShopNow = () => {
           />
           <button className="btn join-item"><FaSearch></FaSearch></button>
           </div>
-          <button onClick={() => setSort(!sort)} className={`btn ${sort?'btn-success':'btn-neutral'}`}>
+          <button onClick={() => setSort(!sort)} className={`btn ${sort?'btn-success':'btn-neutral'} text-white`}>
             <FaList></FaList> {sort?"sorted by price":"short by price"}
           </button> 
         </div>
