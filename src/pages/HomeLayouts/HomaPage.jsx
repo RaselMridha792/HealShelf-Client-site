@@ -4,6 +4,7 @@ import Categories from "./Categories";
 import Discount from "./Discount";
 import FeaturedBrands from "./FeaturedBrands";
 import ShopByHealth from "./ShopByHealth";
+import Deals from "./Deals";
 
 const HomaPage = () => {
   return (
@@ -15,6 +16,7 @@ const HomaPage = () => {
       <Banner></Banner>
       <section className="max-w-screen-2xl mx-auto px-5">
         <Categories></Categories>
+        <Deals></Deals>
         <Discount></Discount>
         <FeaturedBrands></FeaturedBrands>
         <ShopByHealth></ShopByHealth>
