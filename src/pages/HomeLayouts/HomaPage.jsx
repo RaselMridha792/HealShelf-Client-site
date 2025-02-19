@@ -7,6 +7,7 @@ import Deals from "./Deals";
 import Benifit from "./Benifit";
 import Promotion from "./Promotion";
 import FindUs from "./FindUs";
+import HandWash from "./HandWash";
 
 const HomaPage = () => {
   return (
@@ -22,8 +23,9 @@ const HomaPage = () => {
         <FeaturedBrands></FeaturedBrands>
         <Deals></Deals>
         <ShopByHealth></ShopByHealth>
-        <Benifit></Benifit>
+        <HandWash></HandWash>
         <FindUs></FindUs>
+        <Benifit></Benifit>
       </section>
     </>
   );
